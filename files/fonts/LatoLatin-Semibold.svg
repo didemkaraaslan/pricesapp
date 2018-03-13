@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    
+   <meta name="description" content="Türkiye’nin trend yolu, online alışveriş sitesi Trendyol.com ile en sevdiğin markaların yeni sezon ürünlerine ve sana özel kampanyalarına ulaşabilirsin.">
+<meta name="apple-itunes-app" content="app-id=524362642">
+<meta name="googlebot" content="All">
+<meta name="robots" content="All">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="shortcut icon" href="../favicon.ico">
+<meta property="fb:admins" content="714012522">
+<meta property="fb:page_id" content="234419707855">
+<meta property="fb:app_id" content="137649336305073">
+<meta http-equiv="Content-Language" content="TR">
+<meta http-equiv="Copyright" content="Copyright 2017 Trendyol.com">
+<meta http-equiv="Reply-to" content="info@trendyol.com">
+
+
+    <title></title>
+    <link href="../css/NotAuthorizedUserLayoutCss.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="../configr_2"></script>
+    <script src="../HeadScriptsV2"></script>
+
+    
+    
+</head>
+<body>
+    <!--MID:T-G2WEB03-->
+<div class="no-page">
+    <div class="row">
+        
+        <a href="/">
+        <div class="headBg">
+            <div class="leftbg"></div>
+            <div class="rightbg"></div>
+        </div>
+        </a>
+
+        <div class="content">
+            
+
+<!--MID:T-G2WEB03-->
+<script type="text/javascript">
+    $.TYPageName = 'hatasayfasi';
+
+    $.TYErrorSet(
+    {
+        StatusCode: "404",
+        ErrorMessage: "notfound",
+        ReferrerUrl: document.referrer
+    });
+</script>
+
+<div class="lcStaticContent">
+
+    <h2></h2>
+
+<p>Sayfa kaldırılmış veya adresi değiştirilmiş olabilir.</p>
+    <p>Adresi kontrol ederek tekrar deneyebilir ya da alışveriş keyfine devam etmek için aşağıdaki sayfaları deneyebilirsiniz:</p>
+    <div class="link-block">
+        <a href="/Butik/Liste/Kadin" class="black"><span>KADIN <i></i></span></a>
+        <a href="/Butik/Liste/Erkek" class="black"><span>ERKEK <i></i></span></a>
+        <a href="/Butik/Liste/Anne--cocuk" class="black"><span>ANNE &amp; ÇOCUK <i></i></span></a>
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+
+    
+    <script src="../FooterScriptsV2"></script>
+
+    
+
+
+<noscript>
+    <iframe src="../ns.html" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+</noscript>
+<script type="text/javascript">    (function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-292J');</script>
+
+
+    <!--AnalyticsCode Start-->
+<!--Google Start-->
+<script type="text/javascript">
+    function UserStatusText() {
+        var retval = "Visitor";
+        if ('False' == 'True') {
+            retval = "Member";
+        }
+        return retval;
+    }
+</script>
+
+
+
+</body>
+</html>

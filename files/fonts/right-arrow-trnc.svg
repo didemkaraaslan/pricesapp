@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="11px" height="20px" viewBox="0 0 11 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>right-arrow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="4---Sepet-Pop-up-Slide" transform="translate(-1078.000000, -586.000000)" fill-rule="nonzero" fill="#F27A1A">
+            <g id="right-arrow-copy" transform="translate(1078.000000, 586.000000)">
+                <path d="M1.23993559,19.7931034 C1.09822866,19.9310345 0.921095008,20 0.726247987,20 C0.531400966,20 0.354267311,19.9310345 0.212560386,19.7931034 C-0.0708534622,19.5172414 -0.0708534622,19.0689655 0.212560386,18.7931034 L9.24637681,10 L0.212560386,1.20689655 C-0.0708534622,0.931034483 -0.0708534622,0.482758621 0.212560386,0.206896552 C0.495974235,-0.0689655172 0.956521739,-0.0689655172 1.23993559,0.206896552 L10.7874396,9.5 C11.0708535,9.77586207 11.0708535,10.2241379 10.7874396,10.5 L1.23993559,19.7931034 L1.23993559,19.7931034 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

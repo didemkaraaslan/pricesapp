@@ -1,0 +1,177 @@
+﻿body
+{
+    color: #000000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.button-xl {background:url(../images/btn-xl-corner.png) no-repeat left top; height:38px; text-align:center; font-weight:bold; padding:0 0 0 4px; display:inline-block; text-shadow:1px 1px 1px #602602; line-height:38px; font-size:14px;}
+.button-xl span {background:url(../images/btn-xl-bg.png) no-repeat right top; height:38px; display:block; padding:0 20px 0 16px;}
+.button-xl.black { background-position:bottom left;}
+.button-xl.black span {background-position:bottom right;}
+
+.button-m {background:url(../images/btn-m-corner.png) no-repeat left top; height:30px; text-align:center; font-weight:bold; padding:0 0 0 4px; display:inline-block; text-shadow:1px 1px 1px #602602; line-height:30px; font-size:12px}
+.button-m span {background:url(../images/btn-m-bg.png) no-repeat right top; height:30px; display:block; padding:0 20px 0 16px;}
+.button-m.black {background-position:bottom left;}
+.button-m.black span {background-position:bottom right;}
+.button-s {background:url(../images/btn-s-corner.png) no-repeat left top; height:22px; text-align:center; font-weight:bold; padding:0 0 0 4px; display:inline-block; text-shadow:1px 1px 1px #602602; line-height:22px; font-size:11px}
+.button-s span {background:url(../images/btn-s-bg.png) no-repeat right top; height:22px; display:block; padding:0 20px 0 16px;}
+.button-s.black {background-position:bottom left;}
+.button-s.black span {background-position:bottom right;}
+.button-s:hover, .button-m:hover, .button-xl:hover {opacity:0.85; filter:alpha(opacity=85);}
+
+#wrapper
+{
+    margin: 0 auto;
+    width: 980px;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
+{
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    font-size: 100%;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+a
+{
+    color: #fff;
+    text-decoration: none;
+}
+
+
+element.style
+{
+    position: relative;
+}
+
+a
+{
+    color: #fff;
+    text-decoration: none;
+}
+
+.clear
+{
+    clear: both;
+}
+
+body
+{
+    color: #000000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.lcStaticContent
+{
+    color: #fff;
+    padding-right:75px
+}
+
+
+
+/* No Page */
+
+.no-page {
+    width: 100%;
+     position: relative;
+     margin-top: 10px;
+}
+.no-page .row {
+    width: 960px;
+    margin: 0 auto;
+}
+.no-page .headBg {
+    background: url('../images/no-page-bg.jpg') no-repeat top center;
+    width: 960px;
+    height:320px
+}
+.no-page .headBg .leftbg {
+    background: url('../images/cubuk-sol.png') repeat-x;
+    position: absolute;
+    top: 124px;
+    left: 0;
+    width: 50%;
+    height: 15px;
+    z-index: -1;
+}
+.no-page .headBg .rightbg {
+    background: url('../images/cubuk-sag.png') repeat-x;
+    position: absolute;
+    top: 124px;
+    right: 0;
+    width: 50%;
+    height: 15px;
+    z-index: -1;
+}
+.no-page .content {
+    float: left;
+    width: 100%;
+}
+.no-page .content .lcStaticContent {
+    color: #000;
+    padding: 0;
+}
+.no-page .content .lcStaticContent h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    background: url('../images/text-uzgunuz.png') no-repeat;
+    width: 612px;
+    height: 96px;
+    margin: 10px auto 35px auto;
+}
+
+.no-page .content .lcStaticContent h2.errorText {
+    width: 100%;  
+    color: #000000;
+    font-family: "source_sans_prolight";
+    font-size: 38px;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    line-height: 52px;
+    background-image: none;
+}
+
+.no-page .content .lcStaticContent p {
+    margin-top: 10px;
+    text-align: center;
+    color: #000;
+    font-size: 13px;
+}
+.no-page .content .lcStaticContent .link-block {
+    margin-top: 30px;
+    text-align: center;
+}
+.no-page .content .lcStaticContent a {
+    padding: 12px 20px;
+    width: 27%;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+    float: left;
+    background-color: #5b5756;
+}
+    .no-page .content .lcStaticContent a:first-child {
+        margin-left: 20px;
+    }
+    .no-page .content .lcStaticContent a span {
+        position: relative;
+        padding-right: 25px;
+    }
+    .no-page .content .lcStaticContent a span i{
+        position: absolute;
+        right: 0;
+        top: -2px;
+        background: url('../images/arrow-white-right-icon.png') no-repeat;
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        margin: 5px 10px 0 0;
+    }

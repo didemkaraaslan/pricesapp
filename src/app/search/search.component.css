@@ -1,0 +1,12 @@
+
+
+.border-class {
+    border: 2px gray solid;
+    margin: 20px;
+    padding: 20px;
+    width: 400px;
+}
+
+.form-control {
+    font-family: cursive;
+} 
