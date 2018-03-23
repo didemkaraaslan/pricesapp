@@ -1,22 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { Shoe } from '../models/shoe';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+import { Shoe } from '../interfaces/shoe';
 
 @Injectable()
 export class ShoeService {
 
-  apiUrl = '/api/products';
+  //apiUrl = 'https://pricesappserver.herokuapp.com/api/shoes';
  // apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20&callback=JSONP_CALLBACK`;
  
-  results: any;
+  shoesCollection: AngularFirestoreCollection<Shoe>;
+  shoes: Observable<Shoe[]>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private afs: AngularFirestore) { }
 
   getShoesData(searchTerm:string, size: number, gender: string ): Observable<Shoe[]> {
-    return this.http.get<Shoe[]>(this.apiUrl);
-          
+     this.shoesCollection = this.afs.collection('shoesCollection');
+     this.shoes = this.shoesCollection.valueChanges();
+     return this.shoes;
   }
 
 }

@@ -1,12 +1,44 @@
+h2 {
+    color: #2CA4B0;
+    font-family: 'Oleo Script', cursive;
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 32px;
+    margin: 0 0 18px;
+    text-shadow: 1px 0 0 #fff;
+}
 
+p {
+    color: #333;
+    font-family: 'Original Surfer', cursive;
+    font-size: 16px;
+    line-height: 28px;
+    margin: 0 0 24px;
+}
 
 .border-class {
-    border: 2px gray solid;
-    margin: 20px;
+    border: 2px #CBC6C4 solid;
+    margin-top: 150px;
+    margin-left: 0px;
     padding: 20px;
-    width: 400px;
+    width: 450px;
+    box-shadow: 5px 10px 18px rgb(94, 93, 92);
+}
+
+.border-class-logo {
+    border: 2px gray solid;
+    margin-top: 60px;
+    margin-left: 0px;
+    padding: 20px;
+    width: 200px;
+}
+
+.divider {
+    width: 5px;
+    height: auto;
+    display: inline-block;
 }
 
 .form-control {
     font-family: cursive;
-} 
+}

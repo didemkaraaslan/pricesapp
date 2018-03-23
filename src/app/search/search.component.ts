@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 import { ShoeService } from '../services/shoe.service';
-import { Shoe } from '../models/shoe';
+import { Shoe } from '../interfaces/shoe';
 
 
 @Component({
@@ -39,8 +39,8 @@ export class SearchComponent implements OnInit {
 
   getShoes(searchTerm: string, size: number, gender: string,) {
     this.shoeService.getShoesData(searchTerm, size, gender)
-        .subscribe(result => this.shoes = result);
-    
+        .subscribe(result => this.shoes = result );
+        
   }
 
 }
