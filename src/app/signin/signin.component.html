@@ -1,0 +1,25 @@
+
+<form class="form-class" (ngSubmit)="signin(signinForm.value.email, signinForm.value.password )" #signinForm="ngForm"> 
+    <div class="form-group">
+        <div class="col-sm-6">
+            <legend>Giriş Formu</legend>
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email"  name="email" aria-describedby="emailHelp" required ngModel>
+            <small id="emailHelp" class="form-text text-muted">Emailinizi kimseyle paylaşmayacağımıza söz veriyoruz.</small>
+        </div>
+        
+        <div class="form-group">
+        <div class="col-sm-6"> 
+            <label for="password">Şifre</label>
+            <input type="password" class="form-control" id="password" name="password" required ngModel>
+        </div>
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <button type="submit" class="btn btn-info" [disabled]="!signinForm.form.valid">Giriş Yap</button>
+    </div>
+</form>
+
+
+
+

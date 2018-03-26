@@ -1,55 +1,50 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <form class="border-class-logo">
-                <h1>LOGO</h1>
-            </form>
-            <form class="border-class" (ngSubmit)="onSubmit(searchForm.value)" #searchForm="ngForm" [hidden]="submitted">
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                    <label for="searchTerm">AYAKKABI MARKASI</label>
-                    <input type="text" class="form-control" name="searchTerm" id="searchTerm"  placeholder="Ör: Nike Hair" ngModel required>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-6">
-                    <label for="size">BOYUT</label>
-                    <input type="text" class="form-control" name="size" id="size" placeholder="Ör: 20" ngModel>
-                  </div>
-                  <div class="col-sm-6">
-                    <label for="gender">CİNSİYET</label>
-                    <select class="form-control" name="gender" id="gender" ngModel>
-                      <option value="woman">Kadın</option>
-                      <option value="man">Erkek</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class=" col-sm-12">
-                    <button type="submit" class="btn btn-info" style="float: right;" [disabled]="!searchForm.form.valid">Listele bakalım!</button>
-                  </div>
-                </div>
-            </form>
-        </div>
-        <div class="col">
-          <div style="float: right; margin:20px"> 
-            <button type="button" class="btn btn-secondary" >Log in</button>    
-              <div class="divider"></div>
-            <button type="button" class="btn btn-primary" >Sign Up</button>    
-          </div>
-          <div style=" float: right; margin-top:50%;">
-           <h2> Spor Ayakkabıları için en ucuz fiyatları bulun.</h2>
-           <p> <font color="black" style="font-weight:bold">PriceTracker</font> yüzlerce spor ayakkabısı içinden en uygun fiyatları bulma konusunda size yardımcı olur.</p>
-          </div>
-        </div>
+<div class="row">
+    <div class="col">
+        <form class="border-class-logo">
+          <img src="/assets/logo.png" alt="logo">
+        </form>
+        <form class="border-class" (ngSubmit)="onSubmit(searchForm.value.searchTerm, searchForm.value.size, searchForm.value.gender)" 
+        #searchForm="ngForm">
+
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <label for="searchTerm">AYAKKABI MARKASI</label>
+                <input type="text" class="form-control" name="searchTerm" id="searchTerm"  placeholder="Ör: Nike Hair" ngModel required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <label for="size">BOYUT</label>
+                <input type="text" class="form-control" name="size" id="size" placeholder="Ör: 20" ngModel>
+              </div>
+              <div class="col-sm-6">
+                <label for="gender">CİNSİYET</label>
+                <select class="form-control" name="gender" id="gender" ngModel>
+                  <option value="woman">Kadın</option>
+                  <option value="man">Erkek</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class=" col-sm-12">
+                <button type="submit" class="btn btn-info" style="float: right;" [disabled]="!searchForm.form.valid">Listele bakalım!</button>
+              </div>
+            </div>
+        </form>
+    </div>
+    <div class="col">
+      <div style="float: right; margin:20px"> 
+        <button type="button" routerLink="/signin"   class="btn btn-secondary" >Giriş Yap</button>    
+          <div class="divider"></div>
+        <button type="button"  routerLink="/signup"  class="btn btn-primary" >Kayıt Ol</button>    
+      </div>
+      <div style=" float: right; margin-top:50%;">
+        <h2> Spor Ayakkabıları için en ucuz fiyatları bulun.</h2>
+        <p> <font color="black" style="font-weight:bold">PriceTracker</font> yüzlerce spor ayakkabısı içinden en uygun fiyatları bulma konusunda size yardımcı olur.</p>
+      </div>
     </div>
 </div>
 
-  
-
-
-
-<app-shoe [shoes]="shoes"></app-shoe>
 
 
 

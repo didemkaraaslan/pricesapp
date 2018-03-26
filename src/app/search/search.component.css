@@ -18,7 +18,7 @@ p {
 
 .border-class {
     border: 2px #CBC6C4 solid;
-    margin-top: 150px;
+    margin-top: 180px;
     margin-left: 0px;
     padding: 20px;
     width: 450px;
@@ -26,11 +26,11 @@ p {
 }
 
 .border-class-logo {
-    border: 2px gray solid;
-    margin-top: 60px;
+    margin-top: 10px;
     margin-left: 0px;
     padding: 20px;
-    width: 200px;
+    width: 150px;
+    height: 150px;
 }
 
 .divider {

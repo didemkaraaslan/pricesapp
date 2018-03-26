@@ -14,14 +14,13 @@ admin.initializeApp({
 });
  
  var db = admin.firestore();
-
+ var collectionRef = db.collection("shoesCollection");
 
 const f = require('./server/helpers/helpers');
 
 
-var docRef = db.collection('shoesCollection').doc('shoesDocument');
-
-Promise.all([
+app.get('/shoes', (req, res) =>{
+    Promise.all([
         f.fetchShoesFromAyakkabiDunyasi(),
         f.fetchShoesFromHM(),
         // f.fetchShoesFromTrendyol()
@@ -30,19 +29,23 @@ Promise.all([
     .then(results => {
         [ AyakkabiDunyasi, HM] = results;
         Array.prototype.push.apply(AyakkabiDunyasi, HM);
-        console.log(AyakkabiDunyasi);
+
+        var batch = db.batch();
         
-        var setAda = docRef.set({
-            data : AyakkabiDunyasi
-    }); 
-        
+        AyakkabiDunyasi.forEach(function(element) {
+            var docRef = collectionRef.doc();
+            batch.set(docRef, element);
+        });
+
+        batch.commit().then(function () {
+            res.json(AyakkabiDunyasi);
+        });
     })
     .catch(err => {
         console.log(err);
     })
 
-
-
+});
 
 
 
