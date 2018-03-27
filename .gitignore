@@ -34,4 +34,4 @@ yarn-error.log
 PriceTrackingSystem-af50ccbfc727.json
 
 # environments
-src/environments
+/environments

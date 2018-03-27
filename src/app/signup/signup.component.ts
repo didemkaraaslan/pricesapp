@@ -30,6 +30,7 @@ export class SignupComponent {
 
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
                .then(result => {
+                 this.route.navigate(['signin']);
                })
                .catch(errors => {
                  console.log(errors);

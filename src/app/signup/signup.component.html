@@ -32,7 +32,7 @@
         <button class="btn btn-info" style="float: right" type="submit" [disabled]="!signupForm.form.valid">Kayıt Ol</button>
       </div>
       <div class="other-links">
-        <p>Halihazırda bir hesabınız mı var? <a href="#">Buradan giriş yapın.</a></p>
+        <p>Halihazırda bir hesabınız mı var? <a [routerLink]="['/signin']">Buradan giriş yapın.</a></p>
       </div>
     </footer>
   </fieldset>

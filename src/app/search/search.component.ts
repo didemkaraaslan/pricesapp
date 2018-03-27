@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-
-import { ShoeService } from '../services/shoe.service';
-import { Shoe } from '../interfaces/shoe';
 import { Router } from '@angular/router';
 
 
@@ -16,9 +12,9 @@ import { Router } from '@angular/router';
 
 export class SearchComponent {
 
-  constructor(private shoeService: ShoeService, private router: Router) { }
+  constructor(private router: Router) { }
 
-  onSubmit(searchTerm: string, size: number, gender: string) {
+  search(searchTerm: string, size: number, gender: string) {
 
     this.router.navigate(['/shoes'], {
       queryParams: {
