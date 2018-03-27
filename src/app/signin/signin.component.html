@@ -1,24 +1,31 @@
 
-<form class="form-class" (ngSubmit)="signin(signinForm.value.email, signinForm.value.password )" #signinForm="ngForm"> 
-    <div class="form-group">
-        <div class="col-sm-6">
-            <legend>Giriş Formu</legend>
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email"  name="email" aria-describedby="emailHelp" required ngModel>
-            <small id="emailHelp" class="form-text text-muted">Emailinizi kimseyle paylaşmayacağımıza söz veriyoruz.</small>
+<form  class="signin-form" (ngSubmit)="signin(signinForm.value.email, signinForm.value.password )" #signinForm="ngForm" >
+    <header class="form-lead">
+      <h1 class="title">Giriş Formu</h1>
+    </header>
+    <fieldset>
+      <div class="field-group">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email"  autofocus="autofocus" placeholder="Emailinizi giriniz" required ngModel>
+        <small id="emailHelp" class="form-text text-muted">Emailinizi kimseyle paylaşmayacağımıza söz veriyoruz.</small>
+      </div>
+      <div class="field-group">
+        <label for="password">Şifre:</label>
+        <input type="password" id="password" name="password" placeholder="Şifreniz" required ngModel>
+      </div>
+      
+      <footer>
+        <div class="field-group">
+          <button class="btn btn-info" type="submit" [disabled]="!signinForm.form.valid">Giriş Yap</button>
         </div>
-        
-        <div class="form-group">
-        <div class="col-sm-6"> 
-            <label for="password">Şifre</label>
-            <input type="password" class="form-control" id="password" name="password" required ngModel>
+        <div class="other-links">
+          <p><a href="/remind_password/">Şifrenizi mi unuttunuz?</a></p>
+          <p>Hesabınız yok mu ? <a href="#">Buradan kayıt olabilirsiniz!</a></p>
         </div>
-        </div>
-    </div>
-    <div class="col-sm-6"> 
-        <button type="submit" class="btn btn-info" [disabled]="!signinForm.form.valid">Giriş Yap</button>
-    </div>
-</form>
+      </footer>
+    </fieldset>
+  
+  </form>
 
 
 

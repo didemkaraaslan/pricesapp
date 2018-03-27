@@ -18,13 +18,13 @@ export class SearchComponent {
 
   constructor(private shoeService: ShoeService, private router: Router) { }
 
-  onSubmit(searchTerm:string, size:number, gender:string) {
+  onSubmit(searchTerm: string, size: number, gender: string) {
 
-    this.router.navigate(["/shoes"], {
+    this.router.navigate(['/shoes'], {
       queryParams: {
         searchTerm: searchTerm,
-        size:size,
-        gender:gender
+        size: size,
+        gender: gender
       }
     });
   }

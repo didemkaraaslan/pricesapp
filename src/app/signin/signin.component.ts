@@ -8,20 +8,19 @@ import { Router } from '@angular/router';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent{
+export class SigninComponent {
 
   constructor(private afAuth: AngularFireAuth, private route: Router) {}
 
-  signin(email: string, password: string){
-  
+  signin(email: string, password: string) {
     this.afAuth.auth
         .signInWithEmailAndPassword(email, password)
         .then(result => {
-          this.route.navigate(["/home"]);
+          this.route.navigate(['/home']);
         })
         .catch(errors => {
           console.log(errors);
-        })
+        });
   }
 
 }

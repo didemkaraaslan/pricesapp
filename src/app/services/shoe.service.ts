@@ -9,15 +9,15 @@ import { Shoe } from '../interfaces/shoe';
 @Injectable()
 export class ShoeService {
 
-  //apiUrl = 'https://pricesappserver.herokuapp.com/api/shoes';
+  // apiUrl = 'https://pricesappserver.herokuapp.com/api/shoes';
  // apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20&callback=JSONP_CALLBACK`;
- 
+
   shoesCollection: AngularFirestoreCollection<Shoe>;
   shoes: Observable<Shoe[]>;
 
   constructor(private afs: AngularFirestore) { }
 
-  getShoesData(searchTerm:string, size: number, gender: string ): Observable<Shoe[]> {
+  getShoesData(searchTerm: string, size: number, gender: string ): Observable<Shoe[]> {
      this.shoesCollection = this.afs.collection('shoesCollection');
      this.shoes = this.shoesCollection.valueChanges();
      return this.shoes;

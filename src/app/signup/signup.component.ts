@@ -20,21 +20,20 @@ export class SignupComponent {
   ) { }
 
   signup(signupForm: HTMLFormElement) {
-    let name = signupForm.name;
-    let email = signupForm.email;
-    let password = signupForm.password;
-    let passwordConfirm = signupForm.passwordConfirm;
-    let gender = signupForm.gender;
+    const name = signupForm.name;
+    const email = signupForm.email;
+    const password = signupForm.password;
+    const passwordConfirm = signupForm.passwordConfirm;
+    const gender = signupForm.gender;
 
-    let newUser = new User(name, email, password, passwordConfirm, gender);
+    const newUser = new User(name, email, password, passwordConfirm, gender);
 
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
                .then(result => {
-                
                })
                .catch(errors => {
                  console.log(errors);
-               })
+               });
   }
 
 

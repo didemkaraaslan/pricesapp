@@ -24,16 +24,15 @@ export class ShoesComponent implements OnInit {
       this.size = +params.get('size');
       this.gender = params.get('gender');
     });
-    
 
     this.getShoes(this.searchTerm, this.size, this.gender);
   }
 
-  
-  getShoes(searchTerm: string, size: number, gender: string,) {
+
+  getShoes(searchTerm: string, size: number, gender: string) {
     this.shoeService.getShoesData(searchTerm, size, gender)
         .subscribe(result => this.shoes = result );
-        
+
   }
 
 }

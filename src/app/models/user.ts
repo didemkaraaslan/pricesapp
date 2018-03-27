@@ -4,10 +4,10 @@ export class User {
     private password: string;
     private passwordConfirm: string;
     private gender: string;
-    private isAdmin: boolean = false;
+    private isAdmin = false;
 
 
-    constructor(name: string, email: string, password: string, passwordConfirm: string, gender: string ){
+    constructor(name: string, email: string, password: string, passwordConfirm: string, gender: string ) {
         this.name = name;
         this.email = email;
         this.password = password;

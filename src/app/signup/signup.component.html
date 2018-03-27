@@ -1,58 +1,40 @@
-<form   (ngSubmit)="signup(signupForm.value)"   #signupForm="ngForm">
+<form  class="signup-form" (ngSubmit)="signup(signupForm.value)" #signupForm="ngForm" >
+  <header class="form-lead">
+    <h1 class="title">Kayıt Formu</h1>
+  </header>
   <fieldset>
- 
-  <legend>Kayıt Formu</legend>
-  
-  <!-- Nameinput-->
-  <div class="form-group">
-    <label class="col-sm-6 control-label" for="name">İsim</label>  
-    <div class="col-sm-6">
-       <input id="name" name="name" type="text"  class="form-control input-md" required ngModel>
+    <div class="field-group">
+      <label for="name">İsim:</label>
+      <input type="text" id="name" name="name" autofocus="autofocus" placeholder="İsminizi giriniz" required ngModel>
     </div>
-  </div>
-  
-  <!-- Email input-->
-  <div class="form-group">
-    <label class="col-sm-6 control-label" for="email">Email</label>  
-    <div class="col-sm-6">
-       <input id="email" name="email" type="text"  class="form-control input-md" required ngModel>
+    <div class="field-group">
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email" autofocus="autofocus" placeholder="Emailinizi giriniz" required ngModel>
     </div>
-  </div>
-  
-  <!-- Password input-->
-  <div class="form-group">
-    <label class="col-sm-6 control-label" for="password">Şifre</label>
-    <div class="col-sm-4">
-       <input id="password" name="password" type="password"  class="form-control input-md" required ngModel> 
+    <div class="field-group">
+      <label for="password">Şifre:</label>
+      <input type="password" id="password" name="password" autofocus="autofocus" placeholder="Şifrenizi giriniz" required ngModel>
     </div>
-  </div>
-
-    <!-- Password Again-->
-    <div class="form-group">
-      <label class="col-sm-6 control-label" for="passwordConfirm">Şifre Onay</label>
-      <div class="col-sm-4">
-         <input id="passwordConfirm" name="passwordConfirm" type="password"  class="form-control input-md" required ngModel> 
+    <div class="field-group">
+      <label for="passwordConfirm">Şifre Onay:</label>
+      <input type="password" id="passwordConfirm" name="passwordConfirm" autofocus="autofocus" placeholder="Şifrenizi tekrar giriniz" required ngModel>
+    </div>
+    <div class="field-group">
+      <label for="gender">Cinsiyet:</label>
+      <select class="form-control" name="gender" id="gender" ngModel>
+        <option value="woman">Kadın</option>
+        <option value="man">Erkek</option>
+      </select>
+    </div>
+    <br>
+    <footer>
+      <div class="field-group">
+        <button class="btn btn-info" style="float: right" type="submit" [disabled]="!signupForm.form.valid">Kayıt Ol</button>
       </div>
-    </div>
-  
-  <!-- Select Basic -->
-  <div class="form-group">
-    <label class="col-sm-6 control-label" for="gender">Cinsiyet</label>
-    <div class="col-sm-2">
-        <select class="form-control" name="gender" id="gender" ngModel>
-          <option value="woman">Kadın</option>
-          <option value="man">Erkek</option>
-        </select>
-    </div>
-  </div>
-  
-  
-  <!-- Button -->
-  <div class="form-group">
-    <div class="col-sm-6">
-      <button id="signup" name="signup" class="btn btn-info" style="float: right;">Kayıt Ol</button>
-    </div>
-  </div>
-  
+      <div class="other-links">
+        <p>Halihazırda bir hesabınız mı var? <a href="#">Buradan giriş yapın.</a></p>
+      </div>
+    </footer>
   </fieldset>
-  </form>
+
+</form>
