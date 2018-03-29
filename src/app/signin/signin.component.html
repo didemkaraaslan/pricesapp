@@ -1,32 +1,17 @@
+<form class="signin-form" 
+      (ngSubmit)="signin(signinForm.value.email, signinForm.value.password)" #signinForm="ngForm" >
+  <mat-form-field >
+    <input matInput type="text" placeholder="Email" name="email" ngModel required>
+  </mat-form-field>
 
-<form  class="signin-form" (ngSubmit)="signin(signinForm.value.email, signinForm.value.password )" #signinForm="ngForm" >
-    <header class="form-lead">
-      <h1 class="title">Giriş Formu</h1>
-    </header>
-    <fieldset>
-      <div class="field-group">
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email"  autofocus="autofocus" placeholder="Emailinizi giriniz" required ngModel>
-        <small id="emailHelp" class="form-text text-muted">Emailinizi kimseyle paylaşmayacağımıza söz veriyoruz.</small>
-      </div>
-      <div class="field-group">
-        <label for="password">Şifre:</label>
-        <input type="password" id="password" name="password" placeholder="Şifreniz" required ngModel>
-      </div>
-      
-      <footer>
-        <div class="field-group">
-          <button class="btn btn-info" type="submit" [disabled]="!signinForm.form.valid">Giriş Yap</button>
-        </div>
-        <div class="other-links">
-          <p><a href="/remind_password/">Şifrenizi mi unuttunuz?</a></p>
-          <p>Hesabınız yok mu ? <a [routerLink]="['/signup']">Buradan kayıt olabilirsiniz!</a></p>
-        </div>
-      </footer>
-    </fieldset>
-  
-  </form>
+  <mat-form-field>
+    <input matInput type="password" placeholder="Şifre" name="password" ngModel required>
+  </mat-form-field>
 
-
-
-
+  <a style="float: right; text-align:right" routerLink="/remind-password">Şifrenizi mi unuttunuz?</a>
+  <br>
+  <button type="submit" mat-raised-button color="primary">Giriş Yap</button>
+  <p> Henüz üye değil misiniz ?  <a routerLink="/signup">Hesabınızı yaratın.</a> </p>
+  <br> 
+  <mat-error *ngIf="errorMessage"> {{ errorMessage }} </mat-error>
+</form>

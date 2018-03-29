@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent {
+  errorMessage: string;
 
   constructor(private afAuth: AngularFireAuth, private route: Router) {}
 
@@ -18,8 +19,8 @@ export class SigninComponent {
         .then(result => {
           this.route.navigate(['/home']);
         })
-        .catch(errors => {
-          console.log(errors);
+        .catch(error => {
+          this.errorMessage = error.message;
         });
   }
 

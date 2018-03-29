@@ -1,40 +1,25 @@
-<form  class="signup-form" (ngSubmit)="signup(signupForm.value)" #signupForm="ngForm" >
-  <header class="form-lead">
-    <h1 class="title">Kayıt Formu</h1>
-  </header>
-  <fieldset>
-    <div class="field-group">
-      <label for="name">İsim:</label>
-      <input type="text" id="name" name="name" autofocus="autofocus" placeholder="İsminizi giriniz" required ngModel>
-    </div>
-    <div class="field-group">
-      <label for="email">Email:</label>
-      <input type="text" id="email" name="email" autofocus="autofocus" placeholder="Emailinizi giriniz" required ngModel>
-    </div>
-    <div class="field-group">
-      <label for="password">Şifre:</label>
-      <input type="password" id="password" name="password" autofocus="autofocus" placeholder="Şifrenizi giriniz" required ngModel>
-    </div>
-    <div class="field-group">
-      <label for="passwordConfirm">Şifre Onay:</label>
-      <input type="password" id="passwordConfirm" name="passwordConfirm" autofocus="autofocus" placeholder="Şifrenizi tekrar giriniz" required ngModel>
-    </div>
-    <div class="field-group">
-      <label for="gender">Cinsiyet:</label>
-      <select class="form-control" name="gender" id="gender" ngModel>
-        <option value="woman">Kadın</option>
-        <option value="man">Erkek</option>
-      </select>
-    </div>
-    <br>
-    <footer>
-      <div class="field-group">
-        <button class="btn btn-info" style="float: right" type="submit" [disabled]="!signupForm.form.valid">Kayıt Ol</button>
-      </div>
-      <div class="other-links">
-        <p>Halihazırda bir hesabınız mı var? <a [routerLink]="['/signin']">Buradan giriş yapın.</a></p>
-      </div>
-    </footer>
-  </fieldset>
+
+<form class="signup-form" (ngSubmit)="signup(signupForm.value)" #signupForm="ngForm" >
+  <mat-form-field>
+    <input matInput type="text" placeholder="İsim" name="name" ngModel required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Email" name="email" ngModel required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="password" placeholder="Şifre" name="password" ngModel required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="password" placeholder="Şifre Onay" name="passwordConfirm" ngModel required>
+  </mat-form-field>
+
+
+  <button type="submit" mat-raised-button color="primary">Kayıt Ol</button>
+  <p>Zaten bir hesabınız mı var? <a  routerLink="/signin"> Buradan giriş yapın.</a> </p>
+  <br>
+  <mat-error *ngIf="errorMessage">{{ errorMessage }} </mat-error>
 
 </form>

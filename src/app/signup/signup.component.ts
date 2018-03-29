@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
+  errorMessage = '';
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -32,8 +33,8 @@ export class SignupComponent {
                .then(result => {
                  this.route.navigate(['signin']);
                })
-               .catch(errors => {
-                 console.log(errors);
+               .catch(error => {
+                 this.errorMessage = error.message;
                });
   }
 
