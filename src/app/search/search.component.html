@@ -9,16 +9,19 @@
             <div class="form-group row">
               <div class="col-sm-12">
                 <label for="searchTerm">AYAKKABI MARKASI</label>
-                <input type="text" class="form-control" name="searchTerm" id="searchTerm"  placeholder="Ör: Nike Hair" ngModel   required>
+                <select class="form-control" name="searchTerm" id="searchTerm"  ngModel>
+                  <option value="adidas">Adidas</option>
+                  <option value="slazenger">Slazenger</option>
+                </select>
               </div>
             </div>
             <div class="form-group row">
               <div class="col-sm-12">
                 <label for="priceRange">FİYAT ARALIĞI</label>
                 <select class="form-control" name="priceRange" id="priceRange"  ngModel>
-                  <option value="0-150">0-150 TL</option>
-                  <option value="150-300">150-300 TL</option>
-                  <option value="300-∞">300TL ve üzeri</option>
+                  <option value="low">0-200 TL</option>
+                  <option value="optimum">200-500 TL</option>
+                  <option value="maximum">500-1000 TL</option>
                 </select>
               </div>
             </div>

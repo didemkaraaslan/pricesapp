@@ -15,7 +15,7 @@ export class ShoesComponent implements OnInit {
   priceRange: string;
 
   shoes: Shoe[];
-  displayedColumns = ['DetailLink', 'name', 'brandname', 'marketprice'];
+  displayedColumns = ['DetailLink', 'name', 'brandname', 'saleprice'];
 
   constructor(private shoeService: ShoeService, private route: ActivatedRoute) { }
 

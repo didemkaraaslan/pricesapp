@@ -74,8 +74,8 @@ exports.fetchShoesFromAyakkabiDunyasi = () => {
             let Product  = {
                 Name: Name,
                 BrandName: BrandName,
-                MarketPrice: MarketPrice,
-                SalePrice: SalePrice,
+                MarketPrice: parseInt(MarketPrice),
+                SalePrice: parseInt(SalePrice),
                 DetailLink: `https://www.ayakkabidunyasi.com.tr${DetailLink}`,
                 Seller: 'www.ayakkabidunyasi.com.tr',
                 Image: ''
@@ -119,8 +119,8 @@ exports.fetchShoesFromTrendyol = () => {
                 let Product = {
                   Name: productDescriptionContainer.children('.product-brand-name').text().toLowerCase(),
                   BrandName: productDescriptionContainer.children('.product-name').text().toLowerCase(),
-                  MarketPrice: productPricesContainer.children('.product-market-price').text(),
-                  SalePrice: productPricesContainer.children('.product-sale-price').text(),
+                  MarketPrice: parseInt(productPricesContainer.children('.product-market-price').text()),
+                  SalePrice: parseInt(productPricesContainer.children('.product-sale-price').text()),
                   DetailLink: `https://www.trendyol.com${detailLink}`,
                   Seller: 'www.trendyol.com',
                   Image: ''
@@ -163,8 +163,8 @@ exports.fetchShoesFromRovigo = () => {
        let Product = {
            Name: Name,
            BrandName: '',
-           MarketPrice: MarketPrice,
-           SalePrice: SalePrice,
+           MarketPrice: parseInt(MarketPrice),
+           SalePrice: parseInt(SalePrice),
            DetailLink: DetailLink,
            Seller: 'www.rovigo.com.tr',
            Image: ''
@@ -210,8 +210,8 @@ exports.fetchShoesFrom1V1Y = () => {
                
                 Name: Name,
                 BrandName: BrandName,
-                MarketPrice: MarketPrice,
-                SalePrice: SalePrice,
+                MarketPrice: parseInt(MarketPrice),
+                SalePrice:  parseInt(SalePrice),
                 DetailLink: DetailLink,
                 Seller: 'www.sportive.com.tr'
               }
@@ -257,8 +257,8 @@ exports.fetchShoesFromSportive = () => {
                   let Product = {
                     Name: Name.toLowerCase(),
                     BrandName: BrandName.toLowerCase(),
-                    MarketPrice: MarketPrice,
-                    SalePrice: SalePrice,
+                    MarketPrice: parseInt(MarketPrice),
+                    SalePrice: parseInt(SalePrice),
                     DetailLink: DetailLink,
                     Seller: 'www.sportive.com.tr',
                   }
