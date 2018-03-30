@@ -21,24 +21,27 @@ const f = require('./server/helpers/helpers');
 
 app.get('/shoes', (req, res) =>{
     Promise.all([
-        f.fetchShoesFromAyakkabiDunyasi(),
-        f.fetchShoesFromHM(),
-        // f.fetchShoesFromTrendyol()
-        //f.fetchShoesFromSportive()
+          f.fetchShoesFromAyakkabiDunyasi(),
+          f.fetchShoesFromHM(),
+          f.fetchShoesFromRovigo(),
+          f.fetchShoesFromTrendyol(),
+          f.fetchShoesFromSportive(),
+          f.fetchShoesFrom1V1Y()
     ])
     .then(results => {
-        [ AyakkabiDunyasi, HM] = results;
-        Array.prototype.push.apply(AyakkabiDunyasi, HM);
+     
+        [ AyakkabiDunyasi, HM, Rovigo, Trendyol, Sportive, _1V1Y] = results;
 
+        let products = AyakkabiDunyasi.concat(HM, Rovigo, Trendyol, Sportive, _1V1Y);
         var batch = db.batch();
-        
-        AyakkabiDunyasi.forEach(function(element) {
+        console.log(products.length);
+        products.forEach(function(element) {
             var docRef = collectionRef.doc();
             batch.set(docRef, element);
         });
 
         batch.commit().then(function () {
-            res.json(AyakkabiDunyasi);
+            res.json(products);
         });
     })
     .catch(err => {

@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 
 import { ShoeService } from './services/shoe.service';
 
@@ -51,6 +52,7 @@ import { HomeComponent } from './home/home.component';
     MatButtonModule,
     MatSelectModule,
     MatInputModule,
+    MatTableModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [ShoeService],

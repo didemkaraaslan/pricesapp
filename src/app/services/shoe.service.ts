@@ -18,7 +18,9 @@ export class ShoeService {
   constructor(private afs: AngularFirestore) { }
 
   getShoesData(searchTerm: string, size: number, gender: string ): Observable<Shoe[]> {
-     this.shoesCollection = this.afs.collection('shoesCollection');
+     this.shoesCollection = this.afs.collection('shoesCollection', ref => {
+       return ref.where('Name', '==', 'adidas');
+     });
      this.shoes = this.shoesCollection.valueChanges();
      return this.shoes;
   }

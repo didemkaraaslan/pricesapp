@@ -28,20 +28,17 @@ exports.fetchShoesFromHM = () => {
             Code  = $(elm).attr('data-articlecode');
             Image = $(elm).children('.product-item-link').children().attr('src');
 
-            let Shoe  = {
+            let Product  = {
                 Name: Name,
                 MarketPrice: parseInt(MarketPrice),
                 SalePrice: parseInt(SalePrice),
                 DetailLink: `http://www2.hm.com${Link}`,
-                Seller: 'https://www2.hm.com',
-                Code: Code,
+                Seller: 'www2.hm.com',
                 Image: Image
             }
-            parsedResults.push(Shoe);
+            parsedResults.push(Product);
 
         });
-
-
         resolve(parsedResults);
     });
 
@@ -80,11 +77,98 @@ exports.fetchShoesFromAyakkabiDunyasi = () => {
                 MarketPrice: MarketPrice,
                 SalePrice: SalePrice,
                 DetailLink: `https://www.ayakkabidunyasi.com.tr${DetailLink}`,
-                Seller: 'https://www.ayakkabidunyasi.com.tr',
-                Code: '222'
+                Seller: 'www.ayakkabidunyasi.com.tr',
+                Image: ''
             }
             parsedResults.push(Product);
         });
+       resolve(parsedResults);
+    });
+
+  });
+}
+
+
+
+
+/**
+ *  Function which fetches shoes data from seller Trendyol
+ */
+exports.fetchShoesFromTrendyol = () => {
+  return new Promise(function(resolve, reject) {
+    var parsedResults = [];
+    var detail = [];
+    var promises = [];
+  
+    request('https://www.trendyol.com/kadin+spor-ayakkabi', (error, statusCode, page) => {
+      let $ = cheerio.load(page);
+      const products = $('.product-card-wrapper.col-lg-4.col-md-4.col-xs-4');
+      let productDescriptionContainer;
+      let productPricesContainer;
+  
+      products.each((i, elm) => {
+        let productInfoContainer = $(elm).children('.product-detail-link').children('.product-card')
+          .children('.product-info-container');
+        productDescriptionContainer = $(productInfoContainer).children('.product-description-container');
+        productPricesContainer = $(productInfoContainer).children('.product-prices-container');
+        let detailLink = $(elm).children('.product-detail-link').attr('href');
+  
+        let Product = {
+          Name: productDescriptionContainer.children('.product-name').text(),
+          BrandName: productDescriptionContainer.children('.product-brand-name').text(),
+          MarketPrice: productPricesContainer.children('.product-market-price').text(),
+          SalePrice: productPricesContainer.children('.product-sale-price').text(),
+          DetailLink: `https://www.trendyol.com${detailLink}`,
+          Seller: 'www.trendyol.com',
+          Image: ''
+        }
+        parsedResults.push(Product);
+      });
+  
+        resolve(parsedResults);
+      });
+    });
+}
+
+
+
+/**
+ *  Function which fetches shoes data from seller Rovigo
+ */
+exports.fetchShoesFromRovigo = () => {
+  return new Promise(function(resolve, reject){
+    var parsedResults = [];
+      
+    request('https://www.rovigo.com.tr/index.php?route=product/search&search=spor+ayakkab%C4%B1&limit=100', (error, statusCode, page) => {
+      let $ = cheerio.load(page);
+      let Name;
+      let MarketPrice;
+      let SalePrice;
+      let DetailLink;
+     
+      $('.item.contrast_font').each((i,elm) => {
+          
+       let shoeImageInfoContainer = $(elm).children('.image').children('.image_hover');
+       let shoeInfoContainer = $(elm).children('.information_wrapper');
+      
+  
+       DetailLink = shoeImageInfoContainer.children().attr('href');
+       MarketPrice = shoeInfoContainer.children('.price').children('.price-old').text();
+       SalePrice = shoeInfoContainer.children('.price').children('.price-new').text();
+       Name = shoeInfoContainer.children('.left').children('.brand.main_font').text();
+  
+       let Product = {
+           Name: Name,
+           BrandName: '',
+           MarketPrice: MarketPrice,
+           SalePrice: SalePrice,
+           DetailLink: DetailLink,
+           Seller: 'www.rovigo.com.tr',
+           Image: ''
+       }
+  
+       parsedResults.push(Product);
+      });
        resolve(parsedResults);
     });
 
@@ -127,84 +211,77 @@ exports.fetchShoesFromSportive = () => {
           MarketPrice: MarketPrice,
           SalePrice: SalePrice,
           DetailLink: DetailLink,
-          Seller: 'https://www.sportive.com.tr',
-          Code: ''
+          Seller: 'www.sportive.com.tr'
         }
   
         parsedResults.push(Product);
-        promises.push(rp(DetailLink));
   
-      });
-  
-      Promise.all(promises).then((pages) => {
-        let i = 0;
-        pages.forEach(page => {
-          let $ = cheerio.load(page);
-          let Code = $('.code').text();
-          let fix =  Code.substring(Code.lastIndexOf(":") + 2);
-      
-          parsedResults[i].Code = fix;
-          i++;
-        });
-        
-        resolve(parsedResults);
       });
     });
-
+    resolve(parsedResults);
   });
 }
+
 
 
 /**
- *  Function which fetches shoes data from seller Trendyol
+ *  Function which fetches shoes data from seller 1V1Y
  */
-exports.fetchShoesFromTrendyol = () => {
+exports.fetchShoesFrom1V1Y = () => {
   return new Promise(function(resolve, reject) {
-    var parsedResults = [];
-    var detail = [];
-    var promises = [];
-  
-    request('https://www.trendyol.com/kadin+spor-ayakkabi', (error, statusCode, page) => {
-      let $ = cheerio.load(page);
-      const products = $('.product-card-wrapper.col-lg-4.col-md-4.col-xs-4');
-      let productDescriptionContainer;
-      let productPricesContainer;
-  
-      products.each((i, elm) => {
-        let productInfoContainer = $(elm).children('.product-detail-link').children('.product-card')
-          .children('.product-info-container');
-        productDescriptionContainer = $(productInfoContainer).children('.product-description-container');
-        productPricesContainer = $(productInfoContainer).children('.product-prices-container');
-        let detailLink = $(elm).children('.product-detail-link').attr('href');
-  
-        let Product = {
-          Name: productDescriptionContainer.children('.product-name').text(),
-          BrandName: productDescriptionContainer.children('.product-brand-name').text(),
-          MarketPrice: productPricesContainer.children('.product-market-price').text(),
-          SalePrice: productPricesContainer.children('.product-sale-price').text(),
-          DetailLink: `https://www.trendyol.com${detailLink}`,
-          Seller: 'https://www.trendyol.com',
-          Code: ''
-        }
-        parsedResults.push(Product);
-  
-        promises.push(rp(`https://www.trendyol.com${detailLink}`));
-      });
-  
-      Promise.all(promises).then((pages) => {
-        let i = 0;
-        pages.forEach(page => {
-          let $ = cheerio.load(page);
-          let Code = $('.product-name-text').text();
-          parsedResults[i].Code = Code;
-          i++;
-        });
+        var parsedResults = [];
+          
+        request('https://www.1v1y.com/ara?q=spor+ayakkab%C4%B1', (error, statusCode, page) => {
+            let $ = cheerio.load(page);
         
-        resolve(parsedResults);
-      });
-     
-    });
+            let Name;
+            let MarketPrice;
+            let SalePrice;
+            let DetailLink;
+            let BrandName;
+            let Seller;
 
+            $('.productlink').each((i,elm) => {
+              let ProductInfoContainer = $(elm);
+              Name = ProductInfoContainer.children('.brand').text();
+              BrandName = ProductInfoContainer.children('.category').text();
+              MarketPrice = ProductInfoContainer.children('.price').children().first().text();
+              SalePrice = ProductInfoContainer.children('.price').children().first().next().text();
+              DetailLink = $(elm).attr('href');
+        
+          
+              let Product = {
+                Name: Name,
+                BrandName: BrandName,
+                MarketPrice: MarketPrice,
+                SalePrice: SalePrice,
+                DetailLink: `${DetailLink}`,
+                Seller: 'www.1v1y.com',
+                Image: ''
+              }
+        
+              parsedResults.push(Product);
+        
+            });
+          
+           
+        });
+        resolve(parsedResults);
   });
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -16,6 +16,13 @@
     <input matInput type="password" placeholder="Şifre Onay" name="passwordConfirm" ngModel required>
   </mat-form-field>
 
+  <mat-form-field>
+      <mat-select placeholder="Cinsiyet" required>
+        <mat-option value="woman">Kadın</mat-option>
+        <mat-option value="man">Erkek</mat-option>
+      </mat-select>
+  </mat-form-field>
+
 
   <button type="submit" mat-raised-button color="primary">Kayıt Ol</button>
   <p>Zaten bir hesabınız mı var? <a  routerLink="/signin"> Buradan giriş yapın.</a> </p>

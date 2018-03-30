@@ -1,9 +1,8 @@
  export interface Shoe {
     Name: string;
     BrandName: string;
-    MarketPrice: number;
-    SalePrice: number;
+    MarketPrice: string;
+    SalePrice: string;
     DetailLink: string;
     Seller: string;
-    Code: string;
   }
