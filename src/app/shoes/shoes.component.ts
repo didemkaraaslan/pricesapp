@@ -12,8 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class ShoesComponent implements OnInit {
 
   searchTerm: string;
-  size: number;
-  gender: string;
+  priceRange: string;
 
   shoes: Shoe[];
   displayedColumns = ['DetailLink', 'name', 'brandname', 'marketprice'];
@@ -23,16 +22,15 @@ export class ShoesComponent implements OnInit {
   ngOnInit() {
     this.route.queryParamMap.subscribe(params => {
       this.searchTerm = params.get('searchTerm');
-      this.size = +params.get('size');
-      this.gender = params.get('gender');
+      this.priceRange = params.get('priceRange');
     });
 
-    this.getShoes(this.searchTerm, this.size, this.gender);
+    this.getShoes(this.searchTerm, this.priceRange);
   }
 
 
-  getShoes(searchTerm: string, size: number, gender: string) {
-    this.shoeService.getShoesData(searchTerm, size, gender)
+  getShoes(searchTerm: string, priceRange: string) {
+    this.shoeService.getShoesData(searchTerm, priceRange)
         .subscribe(result => {
           this.shoes = result;
           const dataSource = new MatTableDataSource(result);

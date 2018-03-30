@@ -12,15 +12,15 @@ import { Router } from '@angular/router';
 
 export class SearchComponent {
 
+  range: number;
+
   constructor(private router: Router) { }
 
-  search(searchTerm: string, size: number, gender: string) {
-
+  search(searchTerm: string, priceRange: string) {
     this.router.navigate(['/shoes'], {
       queryParams: {
         searchTerm: searchTerm,
-        size: size,
-        gender: gender
+        priceRange: priceRange
       }
     });
   }

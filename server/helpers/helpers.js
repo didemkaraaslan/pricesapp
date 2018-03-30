@@ -22,8 +22,8 @@ exports.fetchShoesFromHM = () => {
         
         $('.product-item').each((i,elm) => {
             Link = $(elm).children('.product-item-details').children('.product-item-heading').children().attr('href');
-            Name = $(elm).children('.product-item-details').children('.product-item-heading').children().text();
-            MarketPrice = $(elm).children('.product-item-details').children('.ng-hide').children('.price').text();
+            Name = $(elm).children('.product-item-details').children('.product-item-heading').children().text().toLowerCase();
+            MarketPrice = $(elm).children('.product-item-details').children('.ng-hide').children('.price').text().toLowerCase();
             SalePrice = $(elm).children('.product-item-details').children().children('.price').text();
             Code  = $(elm).attr('data-articlecode');
             Image = $(elm).children('.product-item-link').children().attr('src');
@@ -55,7 +55,7 @@ exports.fetchShoesFromAyakkabiDunyasi = () => {
   return new Promise(function(resolve, reject){
     var parsedResults = [];
     
-    request('https://www.ayakkabidunyasi.com.tr/list/?search_text=spor+ayakkab%C4%B1', (error, statusCode, page) => {
+    request('https://www.ayakkabidunyasi.com.tr/list/?search_text=spor+ayakkab%C4%B1&attributes_integration_stkalan01=adidas', (error, statusCode, page) => {
         let $ = cheerio.load(page);
         let Name, MarketPrice, SalePrice, DetailLink, Code, BrandName;
             
@@ -65,8 +65,8 @@ exports.fetchShoesFromAyakkabiDunyasi = () => {
             let productImageInfoContainer = $(elm).children('.product-item-wrapper.js-product-wrapper')
             .children('.product-item-image-link');
             DetailLink = productItemInfoContainer.children('.product-name').children('a').attr('href');
-            BrandName = productItemInfoContainer.children('.product-name').children('a').text();
-            Name = productItemInfoContainer.children('.product-name').children('span').text();
+            BrandName = productItemInfoContainer.children('.product-name').children('a').text().toLowerCase();
+            Name = productItemInfoContainer.children('.product-name').children('span').text().toLowerCase();
             SalePrice = productItemInfoContainer.children('.product-price').children('.product-sale-price').text();
             MarketPrice = productItemInfoContainer.children('.product-price').children('.product-list-price').text();
             Code  = $(elm).attr('data-articlecode');
@@ -98,11 +98,9 @@ exports.fetchShoesFromTrendyol = () => {
   return new Promise(function(resolve, reject) {
     var parsedResults = [];
     var promises = [
-      rp('https://www.trendyol.com/spor-ayakkabi?st=spor%20ayakka&qt=Spor%20Ayakkab%C4%B1&qs=search'),
-      rp('https://www.trendyol.com/spor-ayakkabi?st=spor%20ayakka&qt=Spor%20Ayakkab%C4%B1&qs=search&pi=2'),
-      rp('https://www.trendyol.com/spor-ayakkabi?st=spor%20ayakka&qt=Spor%20Ayakkab%C4%B1&qs=search&pi=3'),
-      rp('https://www.trendyol.com/spor-ayakkabi?st=spor%20ayakka&qt=Spor%20Ayakkab%C4%B1&qs=search&pi=4')
-      
+      rp('https://www.trendyol.com/adidas+slazenger?q=Spor+Ayakab%C4%B1&st=spor%20ayakab%C4%B1&qt=spor%20ayakab%C4%B1&qs=search'),
+      rp('https://www.trendyol.com/adidas+slazenger?q=Spor+Ayakab%C4%B1&st=spor%20ayakab%C4%B1&qt=spor%20ayakab%C4%B1&qs=search&pi=2'),
+      rp('https://www.trendyol.com/adidas+slazenger?q=Spor+Ayakab%C4%B1&st=spor%20ayakab%C4%B1&qt=spor%20ayakab%C4%B1&qs=search&pi=3') 
     ];
     Promise.all(promises).then((pages) => {
         pages.forEach(page => {
@@ -119,8 +117,8 @@ exports.fetchShoesFromTrendyol = () => {
                 let detailLink = $(elm).children('.product-detail-link').attr('href');
           
                 let Product = {
-                  Name: productDescriptionContainer.children('.product-name').text(),
-                  BrandName: productDescriptionContainer.children('.product-brand-name').text(),
+                  Name: productDescriptionContainer.children('.product-brand-name').text().toLowerCase(),
+                  BrandName: productDescriptionContainer.children('.product-name').text().toLowerCase(),
                   MarketPrice: productPricesContainer.children('.product-market-price').text(),
                   SalePrice: productPricesContainer.children('.product-sale-price').text(),
                   DetailLink: `https://www.trendyol.com${detailLink}`,
@@ -160,7 +158,7 @@ exports.fetchShoesFromRovigo = () => {
        DetailLink = shoeImageInfoContainer.children().attr('href');
        MarketPrice = shoeInfoContainer.children('.price').children('.price-old').text();
        SalePrice = shoeInfoContainer.children('.price').children('.price-new').text();
-       Name = shoeInfoContainer.children('.left').children('.brand.main_font').text();
+       Name = shoeInfoContainer.children('.left').children('.brand.main_font').text().toLowerCase();
   
        let Product = {
            Name: Name,
@@ -182,51 +180,6 @@ exports.fetchShoesFromRovigo = () => {
 
 
 
-/**
- *  Function which fetches shoes data from seller Sportive
- */
-exports.fetchShoesFromSportive = () => {
-  return new Promise(function(resolve, reject) {
-    var promises = [];
-    var parsedResults = [];
-  
-     request('https://www.sportive.com.tr/tum-spor-ayakkabilar'
-    , (error, statusCode, page) => {
-      
-      let Name;
-      let BrandName;
-      let SalePrice;
-      let MarketPrice;
-      let DetailLink;
-  
-      let $ = cheerio.load(page);
-  
-      $('.col-xs-12.col-sm-4.col-lg-4.product-box').each((i,elm) => {
-        let ProductInfoContainer = $(elm).children('.product').children('.product-info');
-        Name = ProductInfoContainer.children('.product-title').text();
-        BrandName = ProductInfoContainer.children('.product-type').text();
-        SalePrice = ProductInfoContainer.children('.product-price').children('.new').children('.price').text();
-        MarketPrice = ProductInfoContainer.children('.product-price').children('.old').children('.price').text();
-        DetailLink = $(elm).children('.product').attr('href');
-  
-        let Product = {
-         
-          Name: Name,
-          BrandName: BrandName,
-          MarketPrice: MarketPrice,
-          SalePrice: SalePrice,
-          DetailLink: DetailLink,
-          Seller: 'www.sportive.com.tr'
-        }
-  
-        parsedResults.push(Product);
-  
-      });
-    });
-    resolve(parsedResults);
-  });
-}
-
 
 
 /**
@@ -236,40 +189,36 @@ exports.fetchShoesFrom1V1Y = () => {
   return new Promise(function(resolve, reject) {
         var parsedResults = [];
           
-        request('https://www.1v1y.com/ara?q=spor+ayakkab%C4%B1', (error, statusCode, page) => {
+        request('https://www.1v1y.com/ara?q=spor+ayakkab%C4%B1&marka=4800-57986', (error, statusCode, page) => {
             let $ = cheerio.load(page);
-        
             let Name;
-            let MarketPrice;
-            let SalePrice;
-            let DetailLink;
             let BrandName;
-            let Seller;
-
-            $('.productlink').each((i,elm) => {
-              let ProductInfoContainer = $(elm);
-              Name = ProductInfoContainer.children('.brand').text();
-              BrandName = ProductInfoContainer.children('.category').text();
-              MarketPrice = ProductInfoContainer.children('.price').children().first().text();
-              SalePrice = ProductInfoContainer.children('.price').children().first().next().text();
-              DetailLink = $(elm).attr('href');
+            let SalePrice;
+            let MarketPrice;
+            let DetailLink;
+      
         
-          
+            $('.col-xs-12.col-sm-4.col-lg-4.product-box').each((i,elm) => {
+              let ProductInfoContainer = $(elm).children('.product').children('.product-info');
+              Name = ProductInfoContainer.children('.product-title').text().toLowerCase();
+              BrandName = ProductInfoContainer.children('.product-type').text().toLowerCase();
+              SalePrice = ProductInfoContainer.children('.product-price').children('.new').children('.price').text();
+              MarketPrice = ProductInfoContainer.children('.product-price').children('.old').children('.price').text();
+              DetailLink = $(elm).children('.product').attr('href');
+        
               let Product = {
+               
                 Name: Name,
                 BrandName: BrandName,
                 MarketPrice: MarketPrice,
                 SalePrice: SalePrice,
-                DetailLink: `${DetailLink}`,
-                Seller: 'www.1v1y.com',
-                Image: ''
+                DetailLink: DetailLink,
+                Seller: 'www.sportive.com.tr'
               }
         
               parsedResults.push(Product);
         
             });
-          
-           
         });
         resolve(parsedResults);
   });
@@ -278,15 +227,48 @@ exports.fetchShoesFrom1V1Y = () => {
 
 
 
+/**
+ *  Function which fetches shoes data from seller Sportive
+ */
+exports.fetchShoesFromSportive = () => {
+  return new Promise(function(resolve, reject) {
+    var parsedResults = [];
+    var promises = [
+      rp('https://www.sportive.com.tr/tum-spor-ayakkabilar/slazenger-adidas'),
+      rp('https://www.sportive.com.tr/catalog/category/view/id/570/?marka=1042%2C899&p=2')
+    ];
+    Promise.all(promises).then((pages) => {
+        pages.forEach(page => {
+            let $ = cheerio.load(page);
+            let Name;
+            let BrandName;
+            let SalePrice;
+            let MarketPrice;
+            let DetailLink;
+        
+            $('.col-xs-12.col-sm-4.col-lg-4.product-box').each((i,elm) => {
+                  let ProductInfoContainer = $(elm).children('.product').children('.product-info');
+                  Name = ProductInfoContainer.children('.product-title').text();
+                  BrandName = ProductInfoContainer.children('.product-type').text();
+                  SalePrice = ProductInfoContainer.children('.product-price').children('.new').children('.price').text();
+                  MarketPrice = ProductInfoContainer.children('.product-price').children('.old').children('.price').text();
+                  DetailLink = $(elm).children('.product').attr('href');
+            
+                  let Product = {
+                    Name: Name.toLowerCase(),
+                    BrandName: BrandName.toLowerCase(),
+                    MarketPrice: MarketPrice,
+                    SalePrice: SalePrice,
+                    DetailLink: DetailLink,
+                    Seller: 'www.sportive.com.tr',
+                  }
+      
+                  parsedResults.push(Product);
+            });  
+        });
+        resolve(parsedResults);
+    });
+  });
+}
 
-
-
-
-
-
-
-
-
-
-
-
+// adidas, nike, slazenger, hummel
