@@ -54,7 +54,7 @@ exports.fetchShoesFromHM = () => {
 exports.fetchShoesFromAyakkabiDunyasi = () => {
   return new Promise(function(resolve, reject){
     var parsedResults = [];
-      
+    
     request('https://www.ayakkabidunyasi.com.tr/list/?search_text=spor+ayakkab%C4%B1', (error, statusCode, page) => {
         let $ = cheerio.load(page);
         let Name, MarketPrice, SalePrice, DetailLink, Code, BrandName;
@@ -97,37 +97,42 @@ exports.fetchShoesFromAyakkabiDunyasi = () => {
 exports.fetchShoesFromTrendyol = () => {
   return new Promise(function(resolve, reject) {
     var parsedResults = [];
-    var detail = [];
-    var promises = [];
-  
-    request('https://www.trendyol.com/kadin+spor-ayakkabi', (error, statusCode, page) => {
-      let $ = cheerio.load(page);
-      const products = $('.product-card-wrapper.col-lg-4.col-md-4.col-xs-4');
-      let productDescriptionContainer;
-      let productPricesContainer;
-  
-      products.each((i, elm) => {
-        let productInfoContainer = $(elm).children('.product-detail-link').children('.product-card')
-          .children('.product-info-container');
-        productDescriptionContainer = $(productInfoContainer).children('.product-description-container');
-        productPricesContainer = $(productInfoContainer).children('.product-prices-container');
-        let detailLink = $(elm).children('.product-detail-link').attr('href');
-  
-        let Product = {
-          Name: productDescriptionContainer.children('.product-name').text(),
-          BrandName: productDescriptionContainer.children('.product-brand-name').text(),
-          MarketPrice: productPricesContainer.children('.product-market-price').text(),
-          SalePrice: productPricesContainer.children('.product-sale-price').text(),
-          DetailLink: `https://www.trendyol.com${detailLink}`,
-          Seller: 'www.trendyol.com',
-          Image: ''
-        }
-        parsedResults.push(Product);
-      });
-  
-        resolve(parsedResults);
-      });
+    var promises = [
+      rp('https://www.trendyol.com/spor-ayakkabi?st=spor%20ayakka&qt=Spor%20Ayakkab%C4%B1&qs=search'),
+      rp('https://www.trendyol.com/spor-ayakkabi?st=spor%20ayakka&qt=Spor%20Ayakkab%C4%B1&qs=search&pi=2'),
+      rp('https://www.trendyol.com/spor-ayakkabi?st=spor%20ayakka&qt=Spor%20Ayakkab%C4%B1&qs=search&pi=3'),
+      rp('https://www.trendyol.com/spor-ayakkabi?st=spor%20ayakka&qt=Spor%20Ayakkab%C4%B1&qs=search&pi=4')
+      
+    ];
+    Promise.all(promises).then((pages) => {
+        pages.forEach(page => {
+            let $ = cheerio.load(page);
+            const products = $('.product-card-wrapper.col-lg-4.col-md-4.col-xs-4');
+            let productDescriptionContainer;
+            let productPricesContainer;
+        
+            products.each((i, elm) => {
+                let productInfoContainer = $(elm).children('.product-detail-link').children('.product-card')
+                  .children('.product-info-container');
+                productDescriptionContainer = $(productInfoContainer).children('.product-description-container');
+                productPricesContainer = $(productInfoContainer).children('.product-prices-container');
+                let detailLink = $(elm).children('.product-detail-link').attr('href');
+          
+                let Product = {
+                  Name: productDescriptionContainer.children('.product-name').text(),
+                  BrandName: productDescriptionContainer.children('.product-brand-name').text(),
+                  MarketPrice: productPricesContainer.children('.product-market-price').text(),
+                  SalePrice: productPricesContainer.children('.product-sale-price').text(),
+                  DetailLink: `https://www.trendyol.com${detailLink}`,
+                  Seller: 'www.trendyol.com',
+                  Image: ''
+                }
+                parsedResults.push(Product);
+            });  
+        });
+     resolve(parsedResults);
     });
+  });
 }
 
 

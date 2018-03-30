@@ -23,16 +23,17 @@ app.get('/shoes', (req, res) =>{
     Promise.all([
           f.fetchShoesFromAyakkabiDunyasi(),
           f.fetchShoesFromHM(),
-          f.fetchShoesFromRovigo(),
+         // f.fetchShoesFromRovigo(),
           f.fetchShoesFromTrendyol(),
           f.fetchShoesFromSportive(),
           f.fetchShoesFrom1V1Y()
     ])
     .then(results => {
      
-        [ AyakkabiDunyasi, HM, Rovigo, Trendyol, Sportive, _1V1Y] = results;
+        [ AyakkabiDunyasi, HM,  Trendyol, Sportive, _1V1Y] = results;
 
-        let products = AyakkabiDunyasi.concat(HM, Rovigo, Trendyol, Sportive, _1V1Y);
+        let products = AyakkabiDunyasi.concat(HM, Trendyol, Sportive, _1V1Y);
+        
         var batch = db.batch();
         console.log(products.length);
         products.forEach(function(element) {
