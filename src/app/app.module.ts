@@ -25,6 +25,7 @@ import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
 import { ShoesComponent } from './shoes/shoes.component';
 import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -37,7 +38,8 @@ import { HomeComponent } from './home/home.component';
     SignupComponent,
     SigninComponent,
     ShoesComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

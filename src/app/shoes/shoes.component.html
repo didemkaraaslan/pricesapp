@@ -1,31 +1,21 @@
-<div class="example-container mat-elevation-z8">
-    <mat-table #table [dataSource]="shoes">
-  
-      <!-- Position Column -->
-      <ng-container matColumnDef="DetailLink">
-        <mat-header-cell *matHeaderCellDef> Link </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.DetailLink}} </mat-cell>
-      </ng-container>
-  
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.Name}} </mat-cell>
-      </ng-container>
-  
-      <!-- Weight Column -->
-      <ng-container matColumnDef="brandname">
-        <mat-header-cell *matHeaderCellDef> BrandName </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.BrandName}} </mat-cell>
-      </ng-container>
-  
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="saleprice">
-        <mat-header-cell *matHeaderCellDef> SalePrice</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.SalePrice}} </mat-cell>
-      </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+
+<app-navbar></app-navbar>
+<div class="button-row">
+    <button mat-button color="primary">En Pahalılar</button>
+    <button mat-button color="primary">En Ucuzlar</button>
+    <button mat-button color="primary">En çok yorum alanlar</button>
+</div>
+  <div class="card-deck" align="center">
+      <div class="col-md-3" *ngFor="let shoe of shoes">
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ shoe.Name }} {{ shoe.BrandName }}</h5>
+              <p class="card-text"> 
+              
+              </p>
+              <p class="card-text"><small class="text-muted"> {{ shoe.SalePrice }} TL</small></p>
+            </div>
+          </div>
+        <br> <br> <br>          
+      </div>
   </div>

@@ -38,9 +38,12 @@ export class ShoeService {
     } else if (searchTerm === 'optimum') {
       this.filterMin = 200;
       this.filterMax = 500;
-    } else {
+    } else if (searchTerm === 'maxiumum') {
       this.filterMin = 500;
       this.filterMax = 1000;
+    } else {
+      this.filterMin = 0;
+      this.filterMax = 10000;
     }
   }
 

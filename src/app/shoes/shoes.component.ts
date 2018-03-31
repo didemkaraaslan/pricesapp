@@ -13,9 +13,7 @@ export class ShoesComponent implements OnInit {
 
   searchTerm: string;
   priceRange: string;
-
   shoes: Shoe[];
-  displayedColumns = ['DetailLink', 'name', 'brandname', 'saleprice'];
 
   constructor(private shoeService: ShoeService, private route: ActivatedRoute) { }
 
@@ -25,7 +23,7 @@ export class ShoesComponent implements OnInit {
       this.priceRange = params.get('priceRange');
     });
 
-    this.getShoes(this.searchTerm, this.priceRange);
+    //this.getShoes(this.searchTerm, this.priceRange);
   }
 
 

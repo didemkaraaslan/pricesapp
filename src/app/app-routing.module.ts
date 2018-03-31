@@ -10,19 +10,19 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { 
-    path:'search', component: SearchComponent
+    path: '', component: SearchComponent
   },
   {
-     path:'signup', component: SignupComponent
+     path: 'signup', component: SignupComponent
   },
   { 
-    path:'signin', component: SigninComponent
+    path: 'signin', component: SigninComponent
   },
   {
-    path:'shoes', component: ShoesComponent
+    path: 'shoes', component: ShoesComponent
   },
   {
-    path:'home', component: HomeComponent
+    path: 'home', component: HomeComponent
   }
 
 ];
