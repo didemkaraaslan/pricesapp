@@ -1,5 +1,7 @@
 .card {
-  margin-top: 7em;
+  margin-top: 2em;
+  max-width: 280px;
+  max-height: 280px;
 }
 
 .demo-tab-group {
@@ -8,4 +10,14 @@
 
 .demo-tab-content {
   padding: 16px;
+}
+
+.card-img-top {
+  max-width: 80px;
+  max-height: 80px;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
 }

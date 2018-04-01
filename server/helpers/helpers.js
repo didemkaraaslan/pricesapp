@@ -57,7 +57,7 @@ exports.fetchShoesFromAyakkabiDunyasi = () => {
     
     request('https://www.ayakkabidunyasi.com.tr/list/?search_text=spor+ayakkab%C4%B1&attributes_integration_stkalan01=adidas', (error, statusCode, page) => {
         let $ = cheerio.load(page);
-        let Name, MarketPrice, SalePrice, DetailLink, Code, BrandName;
+        let Name, MarketPrice, SalePrice, DetailLink, Image, BrandName;
             
         $('.col-sm-3.col-xs-6.product-item-box').each((i,elm) => {
             let productItemInfoContainer = $(elm).children('.product-item-wrapper.js-product-wrapper')
@@ -69,7 +69,7 @@ exports.fetchShoesFromAyakkabiDunyasi = () => {
             Name = productItemInfoContainer.children('.product-name').children('span').text().toLowerCase();
             SalePrice = productItemInfoContainer.children('.product-price').children('.product-sale-price').text();
             MarketPrice = productItemInfoContainer.children('.product-price').children('.product-list-price').text();
-            Code  = $(elm).attr('data-articlecode');
+            Image = productImageInfoContainer.children('.product-item-image').attr('src');
             
             let Product  = {
                 Name: Name,
@@ -78,7 +78,7 @@ exports.fetchShoesFromAyakkabiDunyasi = () => {
                 SalePrice: parseInt(SalePrice),
                 DetailLink: `https://www.ayakkabidunyasi.com.tr${DetailLink}`,
                 Seller: 'www.ayakkabidunyasi.com.tr',
-                Image: ''
+                Image: Image
             }
             parsedResults.push(Product);
         });
@@ -99,23 +99,26 @@ exports.fetchShoesFromTrendyol = () => {
     var parsedResults = [];
     var promises = [
       rp('https://www.trendyol.com/adidas+slazenger?q=Spor+Ayakab%C4%B1&st=spor%20ayakab%C4%B1&qt=spor%20ayakab%C4%B1&qs=search'),
-      rp('https://www.trendyol.com/adidas+slazenger?q=Spor+Ayakab%C4%B1&st=spor%20ayakab%C4%B1&qt=spor%20ayakab%C4%B1&qs=search&pi=2'),
-      rp('https://www.trendyol.com/adidas+slazenger?q=Spor+Ayakab%C4%B1&st=spor%20ayakab%C4%B1&qt=spor%20ayakab%C4%B1&qs=search&pi=3') 
+      rp('https://www.trendyol.com/adidas+slazenger?q=Spor+Ayakab%C4%B1&st=spor%20ayakab%C4%B1&qt=spor%20ayakab%C4%B1&qs=search&pi=2')
     ];
     Promise.all(promises).then((pages) => {
         pages.forEach(page => {
             let $ = cheerio.load(page);
+            
             const products = $('.product-card-wrapper.col-lg-4.col-md-4.col-xs-4');
             let productDescriptionContainer;
             let productPricesContainer;
+            let productImageContainer;
         
             products.each((i, elm) => {
                 let productInfoContainer = $(elm).children('.product-detail-link').children('.product-card')
                   .children('.product-info-container');
+                productImageContainer = $(elm).children('.product-detail-link').children('.product-card').children('.product-image-container');
                 productDescriptionContainer = $(productInfoContainer).children('.product-description-container');
                 productPricesContainer = $(productInfoContainer).children('.product-prices-container');
                 let detailLink = $(elm).children('.product-detail-link').attr('href');
-          
+                let Image = productImageContainer.children('.product-image.lazy').attr('data-original');
+                
                 let Product = {
                   Name: productDescriptionContainer.children('.product-brand-name').text().toLowerCase(),
                   BrandName: productDescriptionContainer.children('.product-name').text().toLowerCase(),
@@ -123,7 +126,7 @@ exports.fetchShoesFromTrendyol = () => {
                   SalePrice: parseInt(productPricesContainer.children('.product-sale-price').text()),
                   DetailLink: `https://www.trendyol.com${detailLink}`,
                   Seller: 'www.trendyol.com',
-                  Image: ''
+                  Image: (Image === undefined) ? '' : Image
                 }
                 parsedResults.push(Product);
             });  
@@ -132,8 +135,6 @@ exports.fetchShoesFromTrendyol = () => {
     });
   });
 }
-
-
 
 /**
  *  Function which fetches shoes data from seller Rovigo
@@ -235,9 +236,11 @@ exports.fetchShoesFromSportive = () => {
     var parsedResults = [];
     var promises = [
       rp('https://www.sportive.com.tr/tum-spor-ayakkabilar/slazenger-adidas'),
-      rp('https://www.sportive.com.tr/catalog/category/view/id/570/?marka=1042%2C899&p=2')
+      rp('https://www.sportive.com.tr/catalog/category/view/id/570/?marka=1042%2C899&p=2'),
+      rp('https://www.sportive.com.tr/catalog/category/view/id/570/?marka=1042%2C899&p=3')
     ];
     Promise.all(promises).then((pages) => {
+     
         pages.forEach(page => {
             let $ = cheerio.load(page);
             let Name;
@@ -248,11 +251,14 @@ exports.fetchShoesFromSportive = () => {
         
             $('.col-xs-12.col-sm-4.col-lg-4.product-box').each((i,elm) => {
                   let ProductInfoContainer = $(elm).children('.product').children('.product-info');
+                  let ProductImageContainer = $(elm).children('.product').children('.product-photo');
+
                   Name = ProductInfoContainer.children('.product-title').text();
                   BrandName = ProductInfoContainer.children('.product-type').text();
                   SalePrice = ProductInfoContainer.children('.product-price').children('.new').children('.price').text();
                   MarketPrice = ProductInfoContainer.children('.product-price').children('.old').children('.price').text();
                   DetailLink = $(elm).children('.product').attr('href');
+                  Image = ProductImageContainer.children().attr("data-original");
             
                   let Product = {
                     Name: Name.toLowerCase(),
@@ -261,6 +267,7 @@ exports.fetchShoesFromSportive = () => {
                     SalePrice: parseInt(SalePrice),
                     DetailLink: DetailLink,
                     Seller: 'www.sportive.com.tr',
+                    Image: (Image === undefined) ? '' : Image
                   }
       
                   parsedResults.push(Product);

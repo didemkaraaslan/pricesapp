@@ -1,21 +1,26 @@
 
 <app-navbar></app-navbar>
 <div class="button-row">
-    <button mat-button color="primary">En Pahalılar</button>
-    <button mat-button color="primary">En Ucuzlar</button>
-    <button mat-button color="primary">En çok yorum alanlar</button>
+    <button mat-button color="primary" (click)="filter('1')">En Pahalılar</button>
+    <button mat-button color="primary" (click)="filter('2')">En Ucuzlar</button>
+    <button mat-button color="primary" (click)="filter('3')">En çok yorum alanlar</button>
 </div>
   <div class="card-deck" align="center">
-      <div class="col-md-3" *ngFor="let shoe of shoes">
+      <div class="col-md-4" *ngFor="let shoe of shoes">
+        <a routerLink="/a">
         <div class="card">
+            <img class="card-img-top" src="{{ shoe.Image }}" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{ shoe.Name }} {{ shoe.BrandName }}</h5>
               <p class="card-text"> 
-              
+                  <ngb-rating [rate]="currentRate"></ngb-rating>
               </p>
-              <p class="card-text"><small class="text-muted"> {{ shoe.SalePrice }} TL</small></p>
+              <p class="card-text"><b   style="color:indigo"> {{ shoe.SalePrice }} TL</b></p>
+              <p class="card-text"><small class="text-muted"> Ürünü incele ></small></p>
             </div>
-          </div>
-        <br> <br> <br>          
+        </div>   
+        </a>  
       </div>
   </div>
+  
+  <!-- https://www.epttavm.com/magaza/sporthink -->

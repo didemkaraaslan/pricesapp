@@ -19,32 +19,14 @@ export class ShoeService {
 
   constructor(private afs: AngularFirestore) { }
 
-  getShoesData(searchTerm: string, priceRange: string ): Observable<Shoe[]> {
-     this.adjustFilter(priceRange);
-     console.log(this.filterMax);
+  getShoesData(searchTerm: string): Observable<Shoe[]> {
      this.shoesCollection = this.afs.collection('shoesCollection', ref => {
-       return ref.where('Name', '==', searchTerm)
-                 .where('SalePrice', '>=', this.filterMin)
-                 .where('SalePrice', '<=', this.filterMax);
+       return ref.where('Name', '==', searchTerm);
      });
+
      this.shoes = this.shoesCollection.valueChanges();
      return this.shoes;
   }
 
-  adjustFilter(searchTerm: string) {
-    if (searchTerm === 'low') {
-      this.filterMin = 0;
-      this.filterMax = 200;
-    } else if (searchTerm === 'optimum') {
-      this.filterMin = 200;
-      this.filterMax = 500;
-    } else if (searchTerm === 'maxiumum') {
-      this.filterMin = 500;
-      this.filterMax = 1000;
-    } else {
-      this.filterMin = 0;
-      this.filterMax = 10000;
-    }
-  }
 
 }

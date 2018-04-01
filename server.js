@@ -22,17 +22,15 @@ const f = require('./server/helpers/helpers');
 app.get('/shoes', (req, res) =>{
     Promise.all([
           f.fetchShoesFromAyakkabiDunyasi(),
-          //f.fetchShoesFromHM(),
-         // f.fetchShoesFromRovigo(),
           f.fetchShoesFromTrendyol(),
-          f.fetchShoesFromSportive(),
-          f.fetchShoesFrom1V1Y()
+          f.fetchShoesFromSportive()
     ])
     .then(results => {
      
-        [ AyakkabiDunyasi, Trendyol, Sportive, _1V1Y] = results;
+        [ AyakkabiDunyasi, Trendyol, Sportive] = results;
 
-        let products = AyakkabiDunyasi.concat(Trendyol, Sportive, _1V1Y);
+        let products = AyakkabiDunyasi.concat(Trendyol, Sportive);
+       
         var batch = db.batch();
         products.forEach(function(element) {
             var docRef = collectionRef.doc();
@@ -42,11 +40,11 @@ app.get('/shoes', (req, res) =>{
         batch.commit().then(function () {
             console.log(products.length);
             res.json(products);
-        });
+        }); 
     })
     .catch(err => {
         console.log(err);
-    })
+    }) 
 
 });
 
@@ -77,7 +75,7 @@ app.get('*', (req, res) => {
 
 
 // Set Port
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || '4000';
 app.set('port', port);
 
 const server = http.createServer(app);

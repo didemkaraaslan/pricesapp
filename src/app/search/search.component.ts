@@ -16,11 +16,10 @@ export class SearchComponent {
 
   constructor(private router: Router) { }
 
-  search(searchTerm: string, priceRange: string) {
+  search(searchTerm: string) {
     this.router.navigate(['/shoes'], {
       queryParams: {
-        searchTerm: searchTerm,
-        priceRange: priceRange
+        searchTerm: searchTerm
       }
     });
   }

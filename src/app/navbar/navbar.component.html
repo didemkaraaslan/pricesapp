@@ -12,7 +12,7 @@
     <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
       <form class="navbar-form form-inline">
         <div class="input-group search-box">								
-          <input type="text" id="search" class="form-control" placeholder="Search here...">
+          <input type="text" id="search" class="form-control"  placeholder="Aradığını yaz, en ucuzu bul" (keyup.enter)="search(searchTerm.value)" #searchTerm>
           <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
         </div>
       </form>
