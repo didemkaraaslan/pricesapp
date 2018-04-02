@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  selector: 'app-resetpassword',
+  templateUrl: './resetpassword.component.html',
+  styleUrls: ['./resetpassword.component.css']
 })
-export class SigninComponent {
+
+export class ResetpasswordComponent {
   errorMessage: string;
 
   constructor(private authService: AuthService, private route: Router) {}
 
-  signin(email: string, password: string) {
-    this.authService.signInWithEmailAndPassword(email, password)
+  resetPassword(email: string) {
+    this.authService.sendPasswordResetEmail(email)
         .then(result => {
-          this.route.navigate(['/home']);
+          this.route.navigate(['/signin']);
         })
         .catch(error => {
           this.errorMessage = error.message;

@@ -21,7 +21,7 @@ export class ShoeService {
 
   getShoesData(searchTerm: string): Observable<Shoe[]> {
      this.shoesCollection = this.afs.collection('shoesCollection', ref => {
-       return ref.where('Name', '==', searchTerm);
+       return ref.where('Name', '==', searchTerm).limit(100);
      });
 
      this.shoes = this.shoesCollection.valueChanges();

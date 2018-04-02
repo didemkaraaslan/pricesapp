@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
-
-
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -15,10 +12,7 @@ import { Router } from '@angular/router';
 export class SignupComponent {
   errorMessage = '';
 
-  constructor(
-    private afAuth: AngularFireAuth,
-    private route: Router
-  ) { }
+  constructor(private authService: AuthService, private route: Router) { }
 
   signup(signupForm: HTMLFormElement) {
     const name = signupForm.name;
@@ -29,7 +23,7 @@ export class SignupComponent {
 
     const newUser = new User(name, email, password, passwordConfirm, gender);
 
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    this.authService.createUserWithEmailAndPassword(email, password)
                .then(result => {
                  this.route.navigate(['signin']);
                })

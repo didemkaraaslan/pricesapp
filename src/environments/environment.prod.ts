@@ -9,3 +9,5 @@ export const environment = {
     messagingSenderId: '279962669917'
   }
 };
+
+// https://pricetrackingsystem-ab4b1.firebaseapp.com

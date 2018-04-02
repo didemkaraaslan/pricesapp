@@ -26,6 +26,9 @@ import { SigninComponent } from './signin/signin.component';
 import { ShoesComponent } from './shoes/shoes.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ShoeDetailsComponent } from './shoe-details/shoe-details.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { AuthService } from './services/auth.service';
 
 
 
@@ -39,7 +42,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     SigninComponent,
     ShoesComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    ShoeDetailsComponent,
+    ResetpasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +62,10 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatTableModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [ShoeService],
+  providers: [
+    ShoeService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
