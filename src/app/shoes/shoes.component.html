@@ -7,7 +7,7 @@
 </div>
   <div class="card-deck" align="center" *ngIf="shoes.length > 0;else no_result">
       <div class="col-md-4" *ngFor="let shoe of shoes">
-        <a [routerLink]="['/shoe', shoe.Name]">
+        <a (click)="showSimilarResults(shoe)">
         <div class="card">
             <img class="card-img-top" src="{{ shoe.Image }}" alt="Card image cap">
             <div class="card-body">
@@ -24,5 +24,7 @@
   </div>
 
   <ng-template #no_result>Üzgünüz Hiç sonuç bulunamadı...</ng-template>
+
+
   
   <!-- https://www.epttavm.com/magaza/sporthink -->

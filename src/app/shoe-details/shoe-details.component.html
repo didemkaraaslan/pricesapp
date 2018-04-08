@@ -1,3 +1,38 @@
-<p>
-  shoe-details works!
-</p>
+<app-navbar></app-navbar>
+<div class="detailClass">
+  <div class="row">
+    <div class="col">
+      <h4 class="title">{{ shoe.Name }} - {{ shoe.BrandName }}</h4>
+      <div class="card">
+          <img class="card-img-top" src="{{ shoe.Image }}" alt="Card image cap">
+      </div>
+      <span>Puanı &nbsp; <ngb-rating [rate]="currentRate"></ngb-rating> &nbsp; <b>{{ currentRate }} / 10 </b> </span> 
+      <br> 
+      <a routerLink="#">Yorumları gör({{ numberOfComments }})</a>
+     
+    </div> 
+
+    <div class="col">
+      <div class="column2">
+          <div class="sellers" *ngIf="shoe.SimilarWith.length > 0; else no_similar">
+              <span> En iyi fiyat</span>
+              <h1><b> {{ cheapestShoe.SalePrice }}</b> TL</h1> <a href="">{{ cheapestShoe.Seller}} </a> ' dan
+              <mat-list role="list" >
+                  <mat-list-item role="listitem"  *ngFor="let seller of shoe.SimilarWith">
+                     {{ seller.Seller }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b>{{ seller.SalePrice }}</b>&nbsp; TL 
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <button mat-raised-button color="primary"><a target="_blank" href="{{ seller.DetailLink }}">Satıcıya Git</a></button>
+                  </mat-list-item>
+              </mat-list>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #no_similar>
+   <span>Fiyat: <h1><b> {{ shoe.SalePrice }}</b> TL</h1></span>
+   Satıcı: {{ shoe.Seller }} <br>
+   <button mat-raised-button color="primary"><a target="_blank" href="{{ shoe.DetailLink }}">Satıcıya Git</a></button>
+   
+</ng-template>

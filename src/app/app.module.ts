@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
 
 import { ShoeService } from './services/shoe.service';
 
@@ -29,6 +30,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ShoeDetailsComponent } from './shoe-details/shoe-details.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { AuthService } from './services/auth.service';
+import { DataService } from './services/data.service';
 
 
 
@@ -59,12 +61,14 @@ import { AuthService } from './services/auth.service';
     MatButtonModule,
     MatSelectModule,
     MatInputModule,
+    MatListModule,
     MatTableModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     ShoeService,
-    AuthService
+    AuthService,
+    DataService
   ],
   bootstrap: [AppComponent]
 })

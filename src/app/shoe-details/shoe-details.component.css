@@ -1,0 +1,21 @@
+.card-img-top {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.title {
+    margin-top: 3em;
+}
+.card {
+    margin-top: 1em;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.sellers {
+    margin-top: 4em;
+}
+.column2 {
+    margin-top: 4em;
+}
+

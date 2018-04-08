@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoeService } from '../services/shoe.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Shoe } from '../interfaces/shoe';
 import { MatTableDataSource } from '@angular/material/table';
+import { DataService } from '../services/data.service';
 const stringSimilarity = require('string-similarity');
 
 @Component({
@@ -16,12 +17,15 @@ export class ShoesComponent implements OnInit {
   priceRange: string;
   shoes: Shoe[];
   shoesFirestore: Shoe[];
+  shoe: Shoe;
 
   currentRate = 0;
 
-  constructor(private shoeService: ShoeService, private route: ActivatedRoute) {}
+  constructor(private shoeService: ShoeService, private dataService: DataService,
+     private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
+    this.dataService.currentData.subscribe(shoe => this.shoe = shoe);
     this.route.queryParamMap.subscribe(params => {
       this.searchTerm = params.get('searchTerm');
       this.getShoes(this.searchTerm);
@@ -56,6 +60,13 @@ export class ShoesComponent implements OnInit {
         });
   }
 
+  showSimilarResults(shoe: Shoe) {
+    this.shoe = shoe;
+    this.dataService.communicate(shoe);
+    this.router.navigate(['/shoe', shoe.Name]);
+  }
+
+
   similarify(shoes: Shoe[]) {
     shoes.forEach(shoe => {
       shoe.SimilarWith = [];
@@ -71,6 +82,6 @@ export class ShoesComponent implements OnInit {
         }
       }
   }
-  console.log(shoes);
+
   }
 }
