@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ScraperService } from '../services/scraper.service';
 
 
 
@@ -10,11 +11,13 @@ import { Router } from '@angular/router';
 })
 
 
-export class SearchComponent {
+export class SearchComponent implements OnInit {
 
-  range: number;
+  ngOnInit() {
+    // this.scraperService.scrape();
+  }
 
-  constructor(private router: Router) { }
+  constructor(private scraperService: ScraperService, private router: Router) { }
 
   search(searchTerm: string) {
     this.router.navigate(['/shoes'], {

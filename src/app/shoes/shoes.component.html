@@ -7,7 +7,7 @@
 </div>
   <div class="card-deck" align="center" *ngIf="shoes.length > 0;else no_result">
       <div class="col-md-4" *ngFor="let shoe of shoes">
-        <a (click)="showSimilarResults(shoe)">
+        <a (click)="showDetailsPage(shoe)">
         <div class="card">
             <img class="card-img-top" src="{{ shoe.Image }}" alt="Card image cap">
             <div class="card-body">

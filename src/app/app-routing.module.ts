@@ -8,6 +8,7 @@ import { ShoesComponent } from './shoes/shoes.component';
 import { HomeComponent } from './home/home.component';
 import { ShoeDetailsComponent } from './shoe-details/shoe-details.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { ShoeCommentsComponent } from './shoe-comments/shoe-comments.component';
 
 
 const routes: Routes = [
@@ -27,10 +28,13 @@ const routes: Routes = [
     path: 'home', component: HomeComponent
   },
   {
-    path: 'shoe/:name', component: ShoeDetailsComponent
+    path: 'shoes/:id', component: ShoeDetailsComponent
   },
   {
     path: 'resetpassword', component: ResetpasswordComponent
+  },
+  {
+    path: 'shoes/:id/comments', component: ShoeCommentsComponent
   },
 
 

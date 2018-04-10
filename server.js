@@ -34,6 +34,7 @@ app.get('/shoes', (req, res) =>{
         var batch = db.batch();
         products.forEach(function(element) {
             var docRef = collectionRef.doc();
+            element.id= docRef.id;
             batch.set(docRef, element);
         });
 

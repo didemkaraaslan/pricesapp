@@ -1,3 +1,5 @@
+import { Shoe } from '../interfaces/shoe';
+
 const cheerio = require('cheerio');
 const request = require('request');
 const rp = require('request-promise');
@@ -8,39 +10,38 @@ const rp = require('request-promise');
 /**
  * Function which fetches shoes data from seller HM
  */
-exports.fetchShoesFromHM = () => {
+export function fetchShoesFromHM() {
   return new Promise(function(resolve, reject) {
-    let parsedResults = [];
-        
-    request('http://www2.hm.com/tr_tr/search-results.html?q=spor+ayakkab%C4%B1&sort=stock&offset=0&page-size=50', (error, statusCode, page) => {
-        let $ = cheerio.load(page);
-        let Name;
-        let MarketPrice;
-        let SalePrice;
-        let Link;
-        let Code;
-        
-        $('.product-item').each((i,elm) => {
-            Link = $(elm).children('.product-item-details').children('.product-item-heading').children().attr('href');
-            Name = $(elm).children('.product-item-details').children('.product-item-heading').children().text().toLowerCase();
-            MarketPrice = $(elm).children('.product-item-details').children('.ng-hide').children('.price').text().toLowerCase();
-            SalePrice = $(elm).children('.product-item-details').children().children('.price').text();
-            Code  = $(elm).attr('data-articlecode');
-            Image = $(elm).children('.product-item-link').children().attr('src');
+    const parsedResults = [];
+    const shoes: Shoe[] = [];
 
-            let Product  = {
-                Name: Name,
-                MarketPrice: parseInt(MarketPrice),
-                SalePrice: parseInt(SalePrice),
-                DetailLink: `http://www2.hm.com${Link}`,
-                Seller: 'www2.hm.com',
-                Image: Image,
-                RateValue: 0
-            }
-            parsedResults.push(Product);
+    request('http://www2.hm.com/tr_tr/search-results.html?q=spor+ayakkab%C4%B1&sort=stock&offset=0&page-size=50',
+     (error, statusCode, page) => {
+        const $ = cheerio.load(page);
+
+        $('.product-item').each((i, elm) => {
+            const Link = $(elm).children('.product-item-details').children('.product-item-heading').children().attr('href');
+            const Name = $(elm).children('.product-item-details').children('.product-item-heading').children().text().toLowerCase();
+            const MarketPrice = $(elm).children('.product-item-details').children('.ng-hide').children('.price').text().toLowerCase();
+            const SalePrice = $(elm).children('.product-item-details').children().children('.price').text();
+            const Code  = $(elm).attr('data-articlecode');
+            const Image = $(elm).children('.product-item-link').children().attr('src');
+
+            const shoe: Shoe = {
+              ID: '',
+              Name: Name,
+              BrandName: '',
+              SalePrice: parseInt(SalePrice),
+              MarketPrice: parseInt(MarketPrice),
+              DetailLink: `http://www2.hm.com${Link}`,
+              Seller: 'www2.hm.com',
+              Image: Image,
+              RateValue: 0
+            };
+            shoes.push(shoe);
 
         });
-        resolve(parsedResults);
+        resolve(shoes);
     });
 
   });
@@ -52,27 +53,28 @@ exports.fetchShoesFromHM = () => {
 /**
  *  Function which fetches shoes data from seller Ayakkabı Dünyası
  */
-exports.fetchShoesFromAyakkabiDunyasi = () => {
-  return new Promise(function(resolve, reject){
-    var parsedResults = [];
-    
-    request('https://www.ayakkabidunyasi.com.tr/list/?search_text=spor+ayakkab%C4%B1&attributes_integration_stkalan01=adidas', (error, statusCode, page) => {
-        let $ = cheerio.load(page);
-        let Name, MarketPrice, SalePrice, DetailLink, Image, BrandName;
-            
-        $('.col-sm-3.col-xs-6.product-item-box').each((i,elm) => {
-            let productItemInfoContainer = $(elm).children('.product-item-wrapper.js-product-wrapper')
+export function fetchShoesFromAyakkabiDunyasi() {
+  return new Promise(function(resolve, reject) {
+    const shoes: Shoe[] = [];
+
+    request('https://www.ayakkabidunyasi.com.tr/list/?search_text=spor+ayakkab%C4%B1&attributes_integration_stkalan01=adidas',
+     (error, statusCode, page) => {
+        const $ = cheerio.load(page);
+
+        $('.col-sm-3.col-xs-6.product-item-box').each((i, elm) => {
+            const productItemInfoContainer = $(elm).children('.product-item-wrapper.js-product-wrapper')
             .children('.product-item-info');
-            let productImageInfoContainer = $(elm).children('.product-item-wrapper.js-product-wrapper')
+            const productImageInfoContainer = $(elm).children('.product-item-wrapper.js-product-wrapper')
             .children('.product-item-image-link');
-            DetailLink = productItemInfoContainer.children('.product-name').children('a').attr('href');
-            BrandName = productItemInfoContainer.children('.product-name').children('a').text().toLowerCase();
-            Name = productItemInfoContainer.children('.product-name').children('span').text().toLowerCase();
-            SalePrice = productItemInfoContainer.children('.product-price').children('.product-sale-price').text();
-            MarketPrice = productItemInfoContainer.children('.product-price').children('.product-list-price').text();
-            Image = productImageInfoContainer.children('.product-item-image').attr('src');
-            
-            let Product  = {
+            const DetailLink = productItemInfoContainer.children('.product-name').children('a').attr('href');
+            const BrandName = productItemInfoContainer.children('.product-name').children('a').text().toLowerCase();
+            const Name = productItemInfoContainer.children('.product-name').children('span').text().toLowerCase();
+            const SalePrice = productItemInfoContainer.children('.product-price').children('.product-sale-price').text();
+            const MarketPrice = productItemInfoContainer.children('.product-price').children('.product-list-price').text();
+            const Image = productImageInfoContainer.children('.product-item-image').attr('src');
+
+            const shoe: Shoe  = {
+                ID: '',
                 Name: Name,
                 BrandName: BrandName,
                 MarketPrice: parseInt(MarketPrice),
@@ -81,10 +83,10 @@ exports.fetchShoesFromAyakkabiDunyasi = () => {
                 Seller: 'www.ayakkabidunyasi.com.tr',
                 Image: Image,
                 RateValue: 0
-            }
-            parsedResults.push(Product);
+            };
+            shoes.push(shoe);
         });
-       resolve(parsedResults);
+       resolve(shoes);
     });
 
   });
@@ -96,32 +98,34 @@ exports.fetchShoesFromAyakkabiDunyasi = () => {
 /**
  *  Function which fetches shoes data from seller Trendyol
  */
-exports.fetchShoesFromTrendyol = () => {
+export function fetchShoesFromTrendyol() {
   return new Promise(function(resolve, reject) {
-    var parsedResults = [];
-    var promises = [
+    const shoes: Shoe[] = [];
+    const promises = [
       rp('https://www.trendyol.com/adidas+slazenger?q=Spor+Ayakab%C4%B1&st=spor%20ayakab%C4%B1&qt=spor%20ayakab%C4%B1&qs=search'),
       rp('https://www.trendyol.com/adidas+slazenger?q=Spor+Ayakab%C4%B1&st=spor%20ayakab%C4%B1&qt=spor%20ayakab%C4%B1&qs=search&pi=2')
     ];
     Promise.all(promises).then((pages) => {
         pages.forEach(page => {
-            let $ = cheerio.load(page);
-            
+            const $ = cheerio.load(page);
+
             const products = $('.product-card-wrapper.col-lg-4.col-md-4.col-xs-4');
             let productDescriptionContainer;
             let productPricesContainer;
             let productImageContainer;
-        
+
             products.each((i, elm) => {
-                let productInfoContainer = $(elm).children('.product-detail-link').children('.product-card')
+                const productInfoContainer = $(elm).children('.product-detail-link').children('.product-card')
                   .children('.product-info-container');
-                productImageContainer = $(elm).children('.product-detail-link').children('.product-card').children('.product-image-container');
+                productImageContainer = $(elm).children('.product-detail-link').children('.product-card')
+                .children('.product-image-container');
                 productDescriptionContainer = $(productInfoContainer).children('.product-description-container');
                 productPricesContainer = $(productInfoContainer).children('.product-prices-container');
-                let detailLink = $(elm).children('.product-detail-link').attr('href');
-                let Image = productImageContainer.children('.product-image.lazy').attr('data-original');
-                
-                let Product = {
+                const detailLink = $(elm).children('.product-detail-link').attr('href');
+                const Image = productImageContainer.children('.product-image.lazy').attr('data-original');
+
+                const shoe: Shoe = {
+                  ID: '',
                   Name: productDescriptionContainer.children('.product-brand-name').text().toLowerCase(),
                   BrandName: productDescriptionContainer.children('.product-name').text().toLowerCase(),
                   MarketPrice: parseInt(productPricesContainer.children('.product-market-price').text()),
@@ -130,11 +134,11 @@ exports.fetchShoesFromTrendyol = () => {
                   Seller: 'www.trendyol.com',
                   Image: (Image === undefined) ? '' : Image,
                   RateValue: 0
-                }
-                parsedResults.push(Product);
-            });  
+                };
+                shoes.push(shoe);
+            });
         });
-     resolve(parsedResults);
+     resolve(shoes);
     });
   });
 }
@@ -142,29 +146,30 @@ exports.fetchShoesFromTrendyol = () => {
 /**
  *  Function which fetches shoes data from seller Rovigo
  */
-exports.fetchShoesFromRovigo = () => {
-  return new Promise(function(resolve, reject){
-    var parsedResults = [];
-      
+export function fetchShoesFromRovigo() {
+  return new Promise(function(resolve, reject) {
+    const parsedResults = [];
+
     request('https://www.rovigo.com.tr/index.php?route=product/search&search=spor+ayakkab%C4%B1&limit=100', (error, statusCode, page) => {
-      let $ = cheerio.load(page);
+      const $ = cheerio.load(page);
       let Name;
       let MarketPrice;
       let SalePrice;
       let DetailLink;
-     
+
       $('.item.contrast_font').each((i,elm) => {
-          
-       let shoeImageInfoContainer = $(elm).children('.image').children('.image_hover');
-       let shoeInfoContainer = $(elm).children('.information_wrapper');
-      
-  
+
+       const shoeImageInfoContainer = $(elm).children('.image').children('.image_hover');
+       const shoeInfoContainer = $(elm).children('.information_wrapper');
+
+
        DetailLink = shoeImageInfoContainer.children().attr('href');
        MarketPrice = shoeInfoContainer.children('.price').children('.price-old').text();
        SalePrice = shoeInfoContainer.children('.price').children('.price-new').text();
        Name = shoeInfoContainer.children('.left').children('.brand.main_font').text().toLowerCase();
-  
-       let Product = {
+
+       const Product = {
+           ID: '',
            Name: Name,
            BrandName: '',
            MarketPrice: parseInt(MarketPrice),
@@ -173,8 +178,8 @@ exports.fetchShoesFromRovigo = () => {
            Seller: 'www.rovigo.com.tr',
            Image: '',
            RateValue: 0
-       }
-  
+       };
+
        parsedResults.push(Product);
       });
        resolve(parsedResults);
@@ -190,29 +195,29 @@ exports.fetchShoesFromRovigo = () => {
 /**
  *  Function which fetches shoes data from seller 1V1Y
  */
-exports.fetchShoesFrom1V1Y = () => {
+export function fetchShoesFrom1V1Y() {
   return new Promise(function(resolve, reject) {
-        var parsedResults = [];
-          
+        const parsedResults = [];
+
         request('https://www.1v1y.com/ara?q=spor+ayakkab%C4%B1&marka=4800-57986', (error, statusCode, page) => {
-            let $ = cheerio.load(page);
+            const $ = cheerio.load(page);
             let Name;
             let BrandName;
             let SalePrice;
             let MarketPrice;
             let DetailLink;
-      
-        
+
+
             $('.col-xs-12.col-sm-4.col-lg-4.product-box').each((i,elm) => {
-              let ProductInfoContainer = $(elm).children('.product').children('.product-info');
+              const ProductInfoContainer = $(elm).children('.product').children('.product-info');
               Name = ProductInfoContainer.children('.product-title').text().toLowerCase();
               BrandName = ProductInfoContainer.children('.product-type').text().toLowerCase();
               SalePrice = ProductInfoContainer.children('.product-price').children('.new').children('.price').text();
               MarketPrice = ProductInfoContainer.children('.product-price').children('.old').children('.price').text();
               DetailLink = $(elm).children('.product').attr('href');
-        
-              let Product = {
-               
+
+              const Product = {
+                ID: '',
                 Name: Name,
                 BrandName: BrandName,
                 MarketPrice: parseInt(MarketPrice),
@@ -221,9 +226,9 @@ exports.fetchShoesFrom1V1Y = () => {
                 Seller: 'www.sportive.com.tr',
                 RateValue: 0
               }
-        
+
               parsedResults.push(Product);
-        
+
             });
         });
         resolve(parsedResults);
@@ -236,36 +241,32 @@ exports.fetchShoesFrom1V1Y = () => {
 /**
  *  Function which fetches shoes data from seller Sportive
  */
-exports.fetchShoesFromSportive = () => {
+export function fetchShoesFromSportive() {
   return new Promise(function(resolve, reject) {
-    var parsedResults = [];
-    var promises = [
+    const shoes: Shoe[] = [];
+    const promises = [
       rp('https://www.sportive.com.tr/tum-spor-ayakkabilar/slazenger-adidas'),
       rp('https://www.sportive.com.tr/catalog/category/view/id/570/?marka=1042%2C899&p=2'),
       rp('https://www.sportive.com.tr/catalog/category/view/id/570/?marka=1042%2C899&p=3')
     ];
     Promise.all(promises).then((pages) => {
-     
-        pages.forEach(page => {
-            let $ = cheerio.load(page);
-            let Name;
-            let BrandName;
-            let SalePrice;
-            let MarketPrice;
-            let DetailLink;
-        
-            $('.col-xs-12.col-sm-4.col-lg-4.product-box').each((i,elm) => {
-                  let ProductInfoContainer = $(elm).children('.product').children('.product-info');
-                  let ProductImageContainer = $(elm).children('.product').children('.product-photo');
 
-                  Name = ProductInfoContainer.children('.product-title').text();
-                  BrandName = ProductInfoContainer.children('.product-type').text();
-                  SalePrice = ProductInfoContainer.children('.product-price').children('.new').children('.price').text();
-                  MarketPrice = ProductInfoContainer.children('.product-price').children('.old').children('.price').text();
-                  DetailLink = $(elm).children('.product').attr('href');
-                  Image = ProductImageContainer.children().attr("data-original");
-            
-                  let Product = {
+        pages.forEach(page => {
+            const $ = cheerio.load(page);
+
+            $('.col-xs-12.col-sm-4.col-lg-4.product-box').each((i,elm) => {
+                  const ProductInfoContainer = $(elm).children('.product').children('.product-info');
+                  const ProductImageContainer = $(elm).children('.product').children('.product-photo');
+
+                  const Name = ProductInfoContainer.children('.product-title').text();
+                  const BrandName = ProductInfoContainer.children('.product-type').text();
+                  const SalePrice = ProductInfoContainer.children('.product-price').children('.new').children('.price').text();
+                  const MarketPrice = ProductInfoContainer.children('.product-price').children('.old').children('.price').text();
+                  const DetailLink = $(elm).children('.product').attr('href');
+                  const Image = ProductImageContainer.children().attr('data-original');
+
+                  const shoe: Shoe = {
+                    ID: '',
                     Name: Name.toLowerCase(),
                     BrandName: BrandName.toLowerCase(),
                     MarketPrice: parseInt(MarketPrice),
@@ -274,14 +275,12 @@ exports.fetchShoesFromSportive = () => {
                     Seller: 'www.sportive.com.tr',
                     Image: (Image === undefined) ? '' : Image,
                     RateValue: 0
-                  }
-      
-                  parsedResults.push(Product);
-            });  
+                  };
+
+                  shoes.push(shoe);
+            });
         });
-        resolve(parsedResults);
+        resolve(shoes);
     });
   });
 }
-
-// adidas, nike, slazenger, hummel

@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -15,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ShoeService } from './services/shoe.service';
 
@@ -31,6 +33,8 @@ import { ShoeDetailsComponent } from './shoe-details/shoe-details.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { AuthService } from './services/auth.service';
 import { DataService } from './services/data.service';
+import { ShoeCommentsComponent } from './shoe-comments/shoe-comments.component';
+import { ScraperService } from './services/scraper.service';
 
 
 
@@ -46,11 +50,13 @@ import { DataService } from './services/data.service';
     HomeComponent,
     NavbarComponent,
     ShoeDetailsComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    ShoeCommentsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    HttpModule,
     FormsModule,
     NgbModule.forRoot(),
     AppRoutingModule,
@@ -62,13 +68,15 @@ import { DataService } from './services/data.service';
     MatSelectModule,
     MatInputModule,
     MatListModule,
+    MatIconModule,
     MatTableModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     ShoeService,
     AuthService,
-    DataService
+    DataService,
+    ScraperService
   ],
   bootstrap: [AppComponent]
 })

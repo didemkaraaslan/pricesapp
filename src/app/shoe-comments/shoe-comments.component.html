@@ -1,0 +1,20 @@
+
+<mat-list>
+  <h3 mat-subheader>Yorumlar</h3>
+  <mat-list-item *ngFor="let comment of shoe.Comments">
+    <mat-icon  class="material-icons md-48">face</mat-icon>
+    <h4 mat-line>{{ comment.author }}</h4>
+    <p mat-line> {{ comment.content}} </p>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>
+<form class="commentForm" (ngSubmit)="addComment(commentForm.value.author, commentForm.value.content)"  #commentForm="ngForm">
+  <mat-form-field class="example-full-width">
+    <input matInput  name="author" placeholder="Adınız" ngModel required>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <textarea matInput name="content" placeholder="Yorumunuz" ngModel required></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="warn"[disabled]="!commentForm.valid" >Bir yorum yapın!</button>
+</form>

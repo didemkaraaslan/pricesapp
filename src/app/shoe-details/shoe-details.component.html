@@ -8,7 +8,7 @@
       </div>
       <span>Puanı &nbsp; <ngb-rating [rate]="currentRate"></ngb-rating> &nbsp; <b>{{ currentRate }} / 10 </b> </span> 
       <br> 
-      <a routerLink="#">Yorumları gör({{ numberOfComments }})</a>
+      <a [routerLink]="['comments']">Yorumları gör({{ numberOfComments }})</a>
      
     </div> 
 

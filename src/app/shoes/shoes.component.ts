@@ -15,7 +15,7 @@ export class ShoesComponent implements OnInit {
 
   searchTerm: string;
   priceRange: string;
-  shoes: Shoe[];
+  shoes: Shoe[] = [];
   shoesFirestore: Shoe[];
   shoe: Shoe;
 
@@ -56,32 +56,12 @@ export class ShoesComponent implements OnInit {
         .subscribe(result => {
           this.shoesFirestore = result;
           this.shoes = this.shoesFirestore;
-          this.similarify(this.shoes);
         });
   }
 
-  showSimilarResults(shoe: Shoe) {
-    this.shoe = shoe;
+  showDetailsPage(shoe: Shoe) {
     this.dataService.communicate(shoe);
-    this.router.navigate(['/shoe', shoe.Name]);
+    this.router.navigate(['/shoes', shoe.ID]);
   }
 
-
-  similarify(shoes: Shoe[]) {
-    shoes.forEach(shoe => {
-      shoe.SimilarWith = [];
-    });
-    let similarity;
-    for ( let i = 0; i < shoes.length; i++) {
-      for (let k = i + 1; k < shoes.length; k++) {
-        similarity = stringSimilarity.compareTwoStrings(shoes[i].BrandName, shoes[k].BrandName);
-        if ( similarity >= 0.8) {
-          shoes[i].SimilarWith.push(shoes[k]);
-          shoes.splice(k, 1);
-          k--;
-        }
-      }
-  }
-
-  }
 }

@@ -11,13 +11,17 @@ export class ShoeDetailsComponent implements OnInit {
   shoe: Shoe;
   cheapestShoe: Shoe;
   sortedShoes: Shoe[];
-  currentRate = 3;
+  currentRate: number;
   numberOfComments = 25;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.dataService.currentData.subscribe(shoe => this.shoe = shoe);
+    this.dataService.currentData.subscribe(shoe => {
+      this.shoe = shoe;
+      this.currentRate = shoe.RateValue;
+    });
+
     this.comparePrices();
   }
 
