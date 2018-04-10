@@ -1,5 +1,5 @@
 
-<mat-list>
+<mat-list *ngIf="shoe$ | async as shoe; else loading">
   <h3 mat-subheader>Yorumlar</h3>
   <mat-list-item *ngFor="let comment of shoe.Comments">
     <mat-icon  class="material-icons md-48">face</mat-icon>
@@ -8,6 +8,11 @@
   </mat-list-item>
   <mat-divider></mat-divider>
 </mat-list>
+
+<ng-template #loading>
+  Yorumlar yükleniyor..
+</ng-template>
+
 <form class="commentForm" (ngSubmit)="addComment(commentForm.value.author, commentForm.value.content)"  #commentForm="ngForm">
   <mat-form-field class="example-full-width">
     <input matInput  name="author" placeholder="Adınız" ngModel required>

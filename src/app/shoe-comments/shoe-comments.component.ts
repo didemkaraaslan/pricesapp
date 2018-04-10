@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Comment } from '../interfaces/comment';
-import { DataService } from '../services/data.service';
 import { Shoe } from '../interfaces/shoe';
+import { ShoeService } from '../services/shoe.service';
+import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shoe-comments',
@@ -10,19 +12,18 @@ import { Shoe } from '../interfaces/shoe';
 })
 export class ShoeCommentsComponent implements OnInit {
 
-  shoe: Shoe;
+  shoe$: Observable<Shoe>;
 
-  constructor(private dataService: DataService) { }
+  constructor(private shoeService: ShoeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.dataService.currentData.subscribe( shoe => this.shoe = shoe );
+    this.route.paramMap.subscribe(params => {
+      const ID = params.get('id');
+      this.shoe$ = this.shoeService.getShoeWithID(ID);
+    });
   }
 
   addComment(author: string, content: string) {
-    this.shoe.Comments.push({
-      author: author,
-      content: content
-    });
   }
 
 }

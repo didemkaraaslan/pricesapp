@@ -32,12 +32,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ShoeDetailsComponent } from './shoe-details/shoe-details.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { AuthService } from './services/auth.service';
-import { DataService } from './services/data.service';
 import { ShoeCommentsComponent } from './shoe-comments/shoe-comments.component';
 import { ScraperService } from './services/scraper.service';
-
-
-
+import { ArraySortPipe } from './sort.pipe';
 
 
 @NgModule({
@@ -51,7 +48,8 @@ import { ScraperService } from './services/scraper.service';
     NavbarComponent,
     ShoeDetailsComponent,
     ResetpasswordComponent,
-    ShoeCommentsComponent
+    ShoeCommentsComponent,
+    ArraySortPipe
   ],
   imports: [
     BrowserModule,
@@ -75,7 +73,6 @@ import { ScraperService } from './services/scraper.service';
   providers: [
     ShoeService,
     AuthService,
-    DataService,
     ScraperService
   ],
   bootstrap: [AppComponent]

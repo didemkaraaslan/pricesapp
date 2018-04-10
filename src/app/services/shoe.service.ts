@@ -13,7 +13,9 @@ export class ShoeService {
  // apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20&callback=JSONP_CALLBACK`;
 
   shoesCollection: AngularFirestoreCollection<Shoe>;
+  shoeDocument: AngularFirestoreDocument<Shoe>;
   shoes: Observable<Shoe[]>;
+  shoe: Observable<Shoe>;
   filterMax: number;
   filterMin: number;
 
@@ -28,5 +30,10 @@ export class ShoeService {
      return this.shoes;
   }
 
+  getShoeWithID(ID: string): Observable<Shoe> {
+    this.shoeDocument = this.afs.collection('shoesCollection').doc(ID);
+    this.shoe = this.shoeDocument.valueChanges();
+    return this.shoe;
+  }
 
 }

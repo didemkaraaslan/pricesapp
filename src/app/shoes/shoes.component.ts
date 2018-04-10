@@ -25,7 +25,7 @@ export class ShoesComponent implements OnInit {
      private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    this.dataService.currentData.subscribe(shoe => this.shoe = shoe);
+    // this.dataService.currentData.subscribe(shoe => this.shoe = shoe);
     this.route.queryParamMap.subscribe(params => {
       this.searchTerm = params.get('searchTerm');
       this.getShoes(this.searchTerm);
@@ -60,7 +60,7 @@ export class ShoesComponent implements OnInit {
   }
 
   showDetailsPage(shoe: Shoe) {
-    this.dataService.communicate(shoe);
+    // this.dataService.communicate(shoe);
     this.router.navigate(['/shoes', shoe.ID]);
   }
 
