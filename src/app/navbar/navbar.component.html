@@ -17,14 +17,14 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right ml-auto">			
-        <li class="nav-item" *ngIf="!(User$ | async)">  
+        <li class="nav-item" *ngIf="!(authService.User$ | async)">  
             <a class="nav-link" routerLink="/signin" >Giriş Yap </a>
         </li>
-        <li class="nav-item" *ngIf="!(User$ | async)">
+        <li class="nav-item" *ngIf="!(authService.User$ | async)">
             <a class="nav-link" routerLink="/signup" style="color:#33cabb;" >Kayıt Ol </a>
         </li>
       </ul>
-      <ul class="nav navbar-nav"  *ngIf="User$ | async as User">		
+      <ul class="nav navbar-nav"  *ngIf="authService.User$ | async as User">		
           <li ngbDropdown class="nav-item dropdown">
             <a ngbDropdownToggle  data-toggle="dropdown" class="nav-link dropdown-toggle" > {{ User.displayName}} <b class="caret"></b></a>
             <ul ngbDropdownMenu class="dropdown-menu">					

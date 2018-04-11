@@ -25,9 +25,7 @@ export class SignupComponent {
 
     this.authService.createUserWithEmailAndPassword(email, password, name)
                .then(firebaseUser => {
-                 firebaseUser.updateProfile({
-                   displayName: name
-                 });
+                 this.authService.updateProfile(firebaseUser, name);
                  this.route.navigate(['signin']);
                })
                .catch(error => {
