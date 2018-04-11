@@ -35,6 +35,7 @@ import { ShoeCommentsComponent } from './shoe-comments/shoe-comments.component';
 import { ArraySortPipe } from './sort.pipe';
 
 import { environment } from '../environments/environment';
+import { UserService } from './services/user.service';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { environment } from '../environments/environment';
   providers: [
     ShoeService,
     AuthService,
-    ScraperService
+    ScraperService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
