@@ -16,7 +16,6 @@ export class NavbarComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router,
     private afAuth: AngularFireAuth) {
     this.User$ = this.afAuth.authState;
-    console.log(this.User$);
   }
 
   ngOnInit() {

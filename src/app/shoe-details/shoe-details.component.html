@@ -6,9 +6,9 @@
       <div class="card">
           <img class="card-img-top" src="{{shoe.Image }}" alt="Card image cap">
       </div>
-      <span>Puanı &nbsp; <ngb-rating [rate]="currentRate"></ngb-rating> &nbsp; <b>{{ shoe.RateValue }} / 10 </b> </span> 
+      <span>Puanı &nbsp; <ngb-rating [(rate)]="shoe.RateValue" (rateChange)="rateShoe($event)"></ngb-rating> &nbsp; <b>{{ shoe.RateValue }} / 10 </b> </span> 
       <br> 
-      <a [routerLink]="['comments']">Yorumları gör({{ numberOfComments }})</a>
+      <a [routerLink]="['comments']">Yorumları gör({{ shoe.Comments.length }})</a>
      
     </div> 
 

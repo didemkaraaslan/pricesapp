@@ -13,14 +13,19 @@ export class ShoeDetailsComponent implements OnInit {
   shoe$: Observable<Shoe>;
   currentRate = 0;
   numberOfComments = 25;
+  ID: string;
 
   constructor(private shoeService: ShoeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      const ID = params.get('id');
-      this.shoe$ = this.shoeService.getShoeWithID(ID);
+      this.ID = params.get('id');
+      this.shoe$ = this.shoeService.getShoeWithID(this.ID);
     });
+  }
+
+  rateShoe(newRate) {
+    this.shoeService.rateShoe(this.ID, newRate);
   }
 
 

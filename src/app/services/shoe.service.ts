@@ -35,17 +35,6 @@ export class ShoeService {
   }
 
 
-  addComsment(ID: string, comment: Comment) {
-    this.afs.collection('shoesCollection').doc(ID)
-      .update(comment)
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
   addComment(ID: string, comment: Comment) {
     this.shoeDocument = this.afs.collection('shoesCollection').doc(ID);
     this.shoeDocument.ref
@@ -70,6 +59,19 @@ export class ShoeService {
       .catch(error => {
         console.log(error);
       });
+  }
+
+  rateShoe(ID: string, newRate: number) {
+    this.afs.collection('shoesCollection').doc(ID)
+    .update({
+      RateValue: newRate
+    })
+    .then(result => {
+      console.log(result);
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
 }
