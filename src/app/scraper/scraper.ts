@@ -82,7 +82,13 @@ export function fetchShoesFromAyakkabiDunyasi() {
                 DetailLink: `https://www.ayakkabidunyasi.com.tr${DetailLink}`,
                 Seller: 'www.ayakkabidunyasi.com.tr',
                 Image: Image,
-                RateValue: 0
+                RateValue: 0,
+                Comments: [
+                  {
+                    author: 'admin',
+                    content: 'ilk yorum'
+                  }
+                ]
             };
             shoes.push(shoe);
         });
@@ -133,7 +139,13 @@ export function fetchShoesFromTrendyol() {
                   DetailLink: `https://www.trendyol.com${detailLink}`,
                   Seller: 'www.trendyol.com',
                   Image: (Image === undefined) ? '' : Image,
-                  RateValue: 0
+                  RateValue: 0,
+                  Comments: [
+                    {
+                      author: 'admin',
+                      content: 'ilk yorum'
+                    }
+                  ]
                 };
                 shoes.push(shoe);
             });
@@ -274,7 +286,13 @@ export function fetchShoesFromSportive() {
                     DetailLink: DetailLink,
                     Seller: 'www.sportive.com.tr',
                     Image: (Image === undefined) ? '' : Image,
-                    RateValue: 0
+                    RateValue: 0,
+                    Comments: [
+                      {
+                        author: 'admin',
+                        content: 'ilk yorum'
+                      }
+                    ]
                   };
 
                   shoes.push(shoe);

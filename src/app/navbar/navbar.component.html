@@ -17,20 +17,20 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right ml-auto">			
-        <li class="nav-item">  
+        <li class="nav-item" *ngIf="!(User$ | async)">  
             <a class="nav-link" routerLink="/signin" >Giriş Yap </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!(User$ | async)">
             <a class="nav-link" routerLink="/signup" style="color:#33cabb;" >Kayıt Ol </a>
         </li>
       </ul>
-      <ul class="nav navbar-nav">		
+      <ul class="nav navbar-nav"  *ngIf="User$ | async as User">		
           <li ngbDropdown class="nav-item dropdown">
-            <a ngbDropdownToggle  data-toggle="dropdown" class="nav-link dropdown-toggle" >Didem <b class="caret"></b></a>
+            <a ngbDropdownToggle  data-toggle="dropdown" class="nav-link dropdown-toggle" > {{ User.displayName}} <b class="caret"></b></a>
             <ul ngbDropdownMenu class="dropdown-menu">					
               <li><a href="#" class="dropdown-item">Alarmlarım</a></li>
               <li><a href="#" class="dropdown-item">Profilim</a></li>
-              <li><a href="#" class="dropdown-item">Çıkış Yap</a></li>
+              <li><a (click)="signOut()" class="dropdown-item">Çıkış Yap</a></li>
             </ul>
           </li>
         </ul>

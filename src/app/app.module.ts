@@ -19,22 +19,22 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 
 import { ShoeService } from './services/shoe.service';
+import { ScraperService } from './services/scraper.service';
+import { AuthService } from './services/auth.service';
 
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
-
-import { environment } from '../environments/environment';
 import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
 import { ShoesComponent } from './shoes/shoes.component';
-import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ShoeDetailsComponent } from './shoe-details/shoe-details.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
-import { AuthService } from './services/auth.service';
 import { ShoeCommentsComponent } from './shoe-comments/shoe-comments.component';
-import { ScraperService } from './services/scraper.service';
+
 import { ArraySortPipe } from './sort.pipe';
+
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -44,7 +44,6 @@ import { ArraySortPipe } from './sort.pipe';
     SignupComponent,
     SigninComponent,
     ShoesComponent,
-    HomeComponent,
     NavbarComponent,
     ShoeDetailsComponent,
     ResetpasswordComponent,

@@ -1,39 +1,75 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Comment } from '../interfaces/comment';
+import { Shoe } from '../interfaces/shoe';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Shoe } from '../interfaces/shoe';
-
 @Injectable()
 export class ShoeService {
-
-  // apiUrl = 'https://pricesappserver.herokuapp.com/api/shoes';
- // apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20&callback=JSONP_CALLBACK`;
 
   shoesCollection: AngularFirestoreCollection<Shoe>;
   shoeDocument: AngularFirestoreDocument<Shoe>;
   shoes: Observable<Shoe[]>;
   shoe: Observable<Shoe>;
-  filterMax: number;
-  filterMin: number;
+  customShoe: Shoe;
+  snapshot: any;
+  comments: Comment[];
 
   constructor(private afs: AngularFirestore) { }
 
   getShoesData(searchTerm: string): Observable<Shoe[]> {
-     this.shoesCollection = this.afs.collection('shoesCollection', ref => {
-       return ref.where('Name', '==', searchTerm).limit(100);
-     });
+    this.shoesCollection = this.afs.collection('shoesCollection', ref => {
+      return ref.where('Name', '==', searchTerm).limit(100);
+    });
 
-     this.shoes = this.shoesCollection.valueChanges();
-     return this.shoes;
+    this.shoes = this.shoesCollection.valueChanges();
+    return this.shoes;
   }
 
   getShoeWithID(ID: string): Observable<Shoe> {
     this.shoeDocument = this.afs.collection('shoesCollection').doc(ID);
     this.shoe = this.shoeDocument.valueChanges();
     return this.shoe;
+  }
+
+
+  addComsment(ID: string, comment: Comment) {
+    this.afs.collection('shoesCollection').doc(ID)
+      .update(comment)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  addComment(ID: string, comment: Comment) {
+    this.shoeDocument = this.afs.collection('shoesCollection').doc(ID);
+    this.shoeDocument.ref
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          const updateShoe = doc.data();
+
+          this.comments = doc.get('Comments');
+          this.comments.push(comment);
+
+          updateShoe.Comments = this.comments;
+
+          doc.ref.update(updateShoe)
+             .then()
+             .catch(error => {
+                console.log(error);
+             });
+        }
+
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
 }

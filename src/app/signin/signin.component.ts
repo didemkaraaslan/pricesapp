@@ -15,7 +15,7 @@ export class SigninComponent {
   signin(email: string, password: string) {
     this.authService.signInWithEmailAndPassword(email, password)
         .then(result => {
-          this.route.navigate(['/home']);
+          this.route.navigate(['/shoes']);
         })
         .catch(error => {
           this.errorMessage = error.message;

@@ -13,17 +13,19 @@ import { ActivatedRoute } from '@angular/router';
 export class ShoeCommentsComponent implements OnInit {
 
   shoe$: Observable<Shoe>;
+  ID: string;
 
   constructor(private shoeService: ShoeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      const ID = params.get('id');
-      this.shoe$ = this.shoeService.getShoeWithID(ID);
+      this.ID = params.get('id');
+      this.shoe$ = this.shoeService.getShoeWithID(this.ID);
     });
   }
 
   addComment(author: string, content: string) {
+    this.shoeService.addComment(this.ID, { author: author, content: content});
   }
 
 }

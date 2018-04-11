@@ -3,7 +3,6 @@ import { ShoeService } from '../services/shoe.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Shoe } from '../interfaces/shoe';
 import { MatTableDataSource } from '@angular/material/table';
-import { DataService } from '../services/data.service';
 const stringSimilarity = require('string-similarity');
 
 @Component({
@@ -21,11 +20,10 @@ export class ShoesComponent implements OnInit {
 
   currentRate = 0;
 
-  constructor(private shoeService: ShoeService, private dataService: DataService,
+  constructor(private shoeService: ShoeService,
      private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    // this.dataService.currentData.subscribe(shoe => this.shoe = shoe);
     this.route.queryParamMap.subscribe(params => {
       this.searchTerm = params.get('searchTerm');
       this.getShoes(this.searchTerm);
@@ -60,7 +58,6 @@ export class ShoesComponent implements OnInit {
   }
 
   showDetailsPage(shoe: Shoe) {
-    // this.dataService.communicate(shoe);
     this.router.navigate(['/shoes', shoe.ID]);
   }
 

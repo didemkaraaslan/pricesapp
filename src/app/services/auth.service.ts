@@ -17,9 +17,13 @@ export class AuthService {
          .signInWithEmailAndPassword(email, password);
   }
 
-  createUserWithEmailAndPassword(email: string, password: string) {
+  createUserWithEmailAndPassword(email: string, password: string, name: string) {
     return this.afAuth.auth
          .createUserWithEmailAndPassword(email, password);
   }
-
+/*
+  getUser() {
+    this.afAuth.authState.subscribe(firebaseUser => this.User = firebaseUser);
+  }
+*/
 }
