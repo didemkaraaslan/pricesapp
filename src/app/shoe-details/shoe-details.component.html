@@ -9,25 +9,29 @@
       <span>Puanı &nbsp; <ngb-rating [(rate)]="shoe.RateValue" (rateChange)="rateShoe($event)"></ngb-rating> &nbsp; <b>{{ shoe.RateValue }} / 10 </b> </span> 
       <br> 
       <a [routerLink]="['comments']">Yorumları gör({{ shoe.Comments.length }})</a>
-     
     </div> 
+
 
     <div class="col">
       <div class="column2">
           <ng-template #no_similar>
-              <span>Fiyat: <h1><b> {{ shoe.SalePrice }}</b> TL</h1></span>
-              Satıcı: {{ shoe.Seller }} <br>
-              <button mat-raised-button color="primary"><a target="_blank" href="{{ shoe.DetailLink }}">Satıcıya Git</a></button>
-           </ng-template>
+            <app-alarm></app-alarm>
+            <span>Fiyat: <h1><b> {{ shoe.SalePrice }}</b> TL</h1></span>
+            Satıcı: {{ shoe.Seller }} <br>
+            <button mat-raised-button color="primary"><a target="_blank" href="{{ shoe.DetailLink }}">Satıcıya Git</a></button>
+          </ng-template>
+
+      
         <div class="sellers">
           <div class="listele" *ngIf="shoe.SimilarWith.length > 0; else no_similar">
-              <mat-list role="list">
-                  <mat-list-item role="listitem"  *ngFor="let seller of shoe.SimilarWith | sort:'SalePrice'">
-                      {{ seller.Seller }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b>{{seller.SalePrice }}</b>&nbsp; TL 
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <button mat-raised-button color="primary"><a target="_blank" href="{{seller.DetailLink }}">Satıcıya Git</a></button>
-                  </mat-list-item>
-              </mat-list>
+            <app-alarm></app-alarm>
+            <mat-list role="list">
+                <mat-list-item role="listitem"  *ngFor="let seller of shoe.SimilarWith | sort:'SalePrice'">
+                    {{ seller.Seller }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b>{{seller.SalePrice }}</b>&nbsp; TL 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button mat-raised-button color="primary"><a target="_blank" href="{{seller.DetailLink }}">Satıcıya Git</a></button>
+                </mat-list-item>
+            </mat-list>
           </div>
         </div>
       </div>

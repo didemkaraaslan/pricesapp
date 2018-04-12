@@ -13,10 +13,10 @@
             <div class="card-body">
               <h5 class="card-title">{{ shoe.Name }} {{ shoe.BrandName }}</h5>
               <p class="card-text"> 
-                  <ngb-rating [rate]="currentRate"></ngb-rating>
+                  <ngb-rating [rate]="shoe.RateValue"></ngb-rating>
               </p>
               <p class="card-text"><b style="color:indigo"> {{ shoe.SalePrice }} TL</b></p>
-              <p class="card-text"><small class="text-muted"> {{ shoe.SimilarWith.length}} fiyat var ></small></p>
+              <p class="card-text"><small class="text-muted"> {{ shoe.SimilarWith.length + 1}} fiyat var ></small></p>
             </div>
         </div>   
         </a>  

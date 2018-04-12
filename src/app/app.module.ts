@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { ShoeService } from './services/shoe.service';
 import { ScraperService } from './services/scraper.service';
@@ -36,6 +37,8 @@ import { ArraySortPipe } from './sort.pipe';
 
 import { environment } from '../environments/environment';
 import { UserService } from './services/user.service';
+import { AlarmComponent } from './alarm/alarm.component';
+import { AlarmDialogComponent } from './alarm-dialog/alarm-dialog.component';
 
 
 @NgModule({
@@ -49,19 +52,23 @@ import { UserService } from './services/user.service';
     ShoeDetailsComponent,
     ResetpasswordComponent,
     ShoeCommentsComponent,
-    ArraySortPipe
+    ArraySortPipe,
+    AlarmComponent,
+    AlarmDialogComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule.forRoot(),
     AppRoutingModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
+    MatDialogModule,
     MatButtonModule,
     MatSelectModule,
     MatInputModule,
@@ -76,6 +83,7 @@ import { UserService } from './services/user.service';
     ScraperService,
     UserService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AlarmDialogComponent]
 })
 export class AppModule { }
