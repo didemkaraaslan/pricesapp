@@ -39,6 +39,7 @@ import { environment } from '../environments/environment';
 import { UserService } from './services/user.service';
 import { AlarmComponent } from './alarm/alarm.component';
 import { AlarmDialogComponent } from './alarm-dialog/alarm-dialog.component';
+import { NotificationService } from './services/notification.service';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { AlarmDialogComponent } from './alarm-dialog/alarm-dialog.component';
     ShoeService,
     AuthService,
     ScraperService,
-    UserService
+    UserService,
+    NotificationService
   ],
   bootstrap: [AppComponent],
   entryComponents: [AlarmDialogComponent]
