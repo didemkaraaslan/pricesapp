@@ -314,3 +314,53 @@ export function fetchShoesFromSportive() {
     });
   });
 }
+
+
+export function fetchShoesFromBarcin() {
+  return new Promise(function(resolve, reject) {
+    const shoes: Shoe[] = [];
+    const promises = [
+      rp('http://www.barcin.com/ara?marka[0]=adidas&q=spor%20ayakkab%C4%B1'),
+      rp('http://www.barcin.com/ara?marka[0]=adidas&q=spor+ayakkab%C4%B1&sayfa=2'),
+      rp('http://www.barcin.com/ara?marka[0]=adidas&q=spor+ayakkab%C4%B1&sayfa=3')
+    ];
+    Promise.all(promises).then((pages) => {
+
+        pages.forEach(page => {
+            const $ = cheerio.load(page);
+
+            $('.inner').each((i, elm) => {
+                  const ProductInfoContainer = $(elm).children('.product-footer');
+                  const ProductImageContainer = $(elm).children('.figure');
+
+                  const BrandName = ProductInfoContainer.children('.h3.heading').children().first().text();
+                  const SalePrice = ProductInfoContainer.children('.price').children('.new-price').text();
+                  const DetailLink = ProductImageContainer.children().first().attr('href');
+                  const Image = ProductImageContainer.children().attr('data-original');
+
+                  const shoe: Shoe = {
+                    ID: '',
+                    Name: 'adidas',
+                    BrandName: BrandName.toLowerCase(),
+                    MarketPrice: 0,
+                    SalePrice: parseInt(SalePrice),
+                    DetailLink: DetailLink,
+                    Seller: 'www.sportive.com.tr',
+                    Image: (Image === undefined) ? '' : Image,
+                    RateValue: 0,
+                    Comments: [
+                      {
+                        author: 'admin',
+                        content: 'ilk yorum'
+                      }
+                    ]
+                  };
+
+                  shoes.push(shoe);
+            });
+        });
+        resolve(shoes);
+    });
+  });
+
+}

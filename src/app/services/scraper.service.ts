@@ -11,7 +11,7 @@ export class ScraperService {
   ayakkabiDunyasi: {};
   trendyol: {};
   sportive: {};
-  _1v1y: {};
+  barcin: {};
 
   batch;
   shoes: Shoe[];

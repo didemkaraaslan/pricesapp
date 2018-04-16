@@ -14,7 +14,7 @@ import { ScraperService } from '../services/scraper.service';
 export class SearchComponent implements OnInit {
 
   ngOnInit() {
-   // this.scraperService.scrape();
+   this.scraperService.scrape();
   }
 
   constructor(private scraperService: ScraperService, private router: Router) { }
