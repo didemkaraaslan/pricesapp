@@ -11,6 +11,8 @@ export class ScraperService {
   ayakkabiDunyasi: {};
   trendyol: {};
   sportive: {};
+  _1v1y: {};
+
   batch;
   shoes: Shoe[];
 
@@ -59,7 +61,7 @@ export class ScraperService {
         for (let k = i + 1; k < shoes.length; k++) {
           similarity = stringSimilarity.compareTwoStrings(shoes[i].BrandName, shoes[k].BrandName);
 
-          if (similarity >= 0.5) {
+          if (similarity >= 0.8) {
             shoes[i].SimilarWith.push(shoes[k]);
             shoes.splice(k, 1);
             k--;

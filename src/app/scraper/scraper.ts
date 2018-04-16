@@ -36,7 +36,13 @@ export function fetchShoesFromHM() {
               DetailLink: `http://www2.hm.com${Link}`,
               Seller: 'www2.hm.com',
               Image: Image,
-              RateValue: 0
+              RateValue: 0,
+              Comments: [
+                {
+                  author: 'admin',
+                  content: 'ilk yorum'
+                }
+              ]
             };
             shoes.push(shoe);
 
@@ -236,8 +242,14 @@ export function fetchShoesFrom1V1Y() {
                 SalePrice:  parseInt(SalePrice),
                 DetailLink: DetailLink,
                 Seller: 'www.sportive.com.tr',
-                RateValue: 0
-              }
+                RateValue: 0,
+                Comments: [
+                  {
+                    author: 'admin',
+                    content: 'ilk yorum'
+                  }
+                ]
+              };
 
               parsedResults.push(Product);
 
