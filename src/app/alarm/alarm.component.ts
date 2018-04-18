@@ -3,6 +3,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AlarmDialogComponent } from '../alarm-dialog/alarm-dialog.component';
 import { NotificationService } from '../services/notification.service';
 import { ActivatedRoute } from '@angular/router';
+import { Alarm } from '../interfaces/Alarm';
+import { Observable } from 'rxjs/observable';
 
 @Component({
   selector: 'app-alarm',
@@ -11,10 +13,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AlarmComponent implements OnInit {
 
+  Alarm$: Observable<Alarm[]>;
   showDialog = true;
-  showAlarmMessage: boolean;
-  animal: string;
-  name: string;
   ID: string;
 
   constructor(private dialog: MatDialog, private routeActivated: ActivatedRoute,
@@ -25,7 +25,8 @@ export class AlarmComponent implements OnInit {
     this.routeActivated.paramMap.subscribe(params => {
       this.ID = params.get('id');
     });
-    this.showAlarmMessage = this.isAlarmSet();
+
+    this.Alarm$ = this.getAlarm();
   }
 
   openDialog() {
@@ -39,11 +40,12 @@ export class AlarmComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(data => {
       this.notificationService.add(this.ID, data.email);
-      this.showAlarmMessage = true;
     });
   }
 
-  isAlarmSet() {
-    return this.notificationService.isAlarmSetOnShoe(this.ID);
+  getAlarm(): Observable<Alarm[]> {
+    return this.notificationService.getAlarmWithId(this.ID);
   }
+
+
 }

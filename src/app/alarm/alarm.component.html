@@ -1,14 +1,19 @@
 
 
-<div class="alarm">
+<div class="alarm" *ngIf="(Alarm$ | async)?.length > 0; else show">
     <span>
-      <button mat-raised-button  *ngIf="showAlarmMessage == false; else alarm_set"  (click)="openDialog()">
-          <i class="material-icons">alarm</i>
-          Fiyat düşünce haber ver..
-      </button>
+      Teşekkür ederiz! İndirim olduğunda size haber vereceğiz.
     </span>
 </div>
 
-<ng-template #alarm_set>
-    <span *ngIf="showAlarmMessage"> Teşekkür ederiz! İndirim olduğunda size haber vereceğiz.</span>
+
+<ng-template #show>
+    <div class="alarm">
+        <span>
+            <button mat-raised-button  (click)="openDialog()">
+                <i class="material-icons">alarm</i>
+                Fiyat düşünce haber ver..
+            </button>
+        </span>
+    </div>
 </ng-template>

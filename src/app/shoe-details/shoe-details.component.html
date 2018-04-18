@@ -15,7 +15,7 @@
     <div class="col">
       <div class="column2">
           <ng-template #no_similar>
-            <app-alarm></app-alarm>
+            <app-alarm *ngIf="user$ | async as user"></app-alarm>
             <span>Fiyat: <h1><b> {{ shoe.SalePrice }}</b> TL</h1></span>
             Satıcı: {{ shoe.Seller }} <br>
             <button mat-raised-button color="primary"><a target="_blank" href="{{ shoe.DetailLink }}">Satıcıya Git</a></button>
@@ -24,7 +24,7 @@
       
         <div class="sellers">
           <div class="listele" *ngIf="shoe.SimilarWith.length > 0; else no_similar">
-            <app-alarm></app-alarm>
+            <app-alarm *ngIf="user$ | async as user"></app-alarm>
             <mat-list role="list">
                 <mat-list-item role="listitem"  *ngFor="let seller of shoe.SimilarWith | sort:'SalePrice'">
                     {{ seller.Seller }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b>{{seller.SalePrice }}</b>&nbsp; TL 

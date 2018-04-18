@@ -4,28 +4,36 @@ import { Observable } from 'rxjs/observable';
 import { Shoe } from '../interfaces/shoe';
 import { ShoeService } from './shoe.service';
 import { Alarm } from '../interfaces/Alarm';
+import { AuthService } from './auth.service';
+import * as firebase from 'firebase';
 
 @Injectable()
 export class NotificationService {
+
+  notificationCollection: AngularFirestoreCollection<Alarm>;
   success = false;
-  isAlarmExists = false;
-  alarm: Alarm = {
+  newAlarm: Alarm = {
     Email: '',
+    ShoeID: '',
     Shoe: null
   };
 
-  constructor(private afs: AngularFirestore, private shoeService: ShoeService) { }
+  constructor(
+    private afs: AngularFirestore,
+    private shoeService: ShoeService,
+    private authService: AuthService
+  ) { }
 
   add(ID: string, email: string): boolean {
-    console.log(email);
+
     this.shoeService.getShoeWithID(ID)
         .subscribe(shoe => {
+          this.newAlarm.Email = firebase.auth().currentUser.email;
+          this.newAlarm.ShoeID = ID;
+          this.newAlarm.Shoe = shoe;
 
-          this.alarm.Email = email;
-          this.alarm.Shoe = shoe;
-
-          this.afs.collection('notificationsCollection').doc(ID)
-              .set(this.alarm)
+          this.afs.collection('notificationsCollection').doc(this.afs.createId())
+              .set(this.newAlarm)
               .then(onFulfilled => {
                 this.success = true;
               })
@@ -36,17 +44,12 @@ export class NotificationService {
         return this.success;
   }
 
-  isAlarmSetOnShoe(ID: string) {
-      this.afs.collection('notificationsCollection')
-        .doc(ID).ref.get()
-        .then(doc => {
-          if (doc.exists) {
-            this.isAlarmExists = true;
-          } else {
-            this.isAlarmExists = false;
-          }
-        });
-    return this.isAlarmExists;
+  getAlarmWithId(ID: string): Observable<Alarm[]> {
+      this.notificationCollection = this.afs.collection('notificationsCollection', ref => {
+        return ref.where('Email', '==', firebase.auth().currentUser.email)
+                  .where('ShoeID', '==', ID);
+      });
+      return this.notificationCollection.valueChanges();
   }
 
 
