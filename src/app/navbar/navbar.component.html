@@ -28,8 +28,7 @@
           <li ngbDropdown class="nav-item dropdown">
             <a ngbDropdownToggle  data-toggle="dropdown" class="nav-link dropdown-toggle" > {{ User.displayName}} <b class="caret"></b></a>
             <ul ngbDropdownMenu class="dropdown-menu">					
-              <li><a href="#" class="dropdown-item">Alarmlarım</a></li>
-              <li><a href="#" class="dropdown-item">Profilim</a></li>
+              <li><a routerLink="/alarms" class="dropdown-item">Alarmlarım</a></li>
               <li><a (click)="signOut()" class="dropdown-item">Çıkış Yap</a></li>
             </ul>
           </li>

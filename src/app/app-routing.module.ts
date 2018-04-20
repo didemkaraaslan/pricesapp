@@ -8,6 +8,7 @@ import { ShoesComponent } from './shoes/shoes.component';
 import { ShoeDetailsComponent } from './shoe-details/shoe-details.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { ShoeCommentsComponent } from './shoe-comments/shoe-comments.component';
+import { AlarmDetailsComponent } from './alarm-details/alarm-details.component';
 
 
 const routes: Routes = [
@@ -32,7 +33,9 @@ const routes: Routes = [
   {
     path: 'shoes/:id/comments', component: ShoeCommentsComponent
   },
-
+  {
+    path: 'alarms', component: AlarmDetailsComponent
+  }
 
 ];
 @NgModule({

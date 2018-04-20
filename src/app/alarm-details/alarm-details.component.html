@@ -1,0 +1,26 @@
+
+<app-navbar></app-navbar>
+<div class="userAlarms" *ngIf="Alarms$ | async; let Alarms">
+  <div class="alarms">
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let Alarm of Alarms">
+          <img class="shoeImage" src="{{ Alarm.Shoe.Image }}" alt="Resim" height="60" width="80"> &nbsp;
+          <a class="shoeDetailLink" [routerLink]="['/shoes', Alarm.Shoe.ID]">{{ Alarm.Shoe.BrandName}}</a>
+          <span class="shoePrice" style="float: right;">
+             <i>Fiyat düşünce haber verilecek</i>
+             <div class="price">
+                <h2>{{ Alarm.Shoe.SalePrice }}</h2> <i>TL</i>
+             </div>
+          </span>
+          
+        </li>
+    </ul>
+  </div>
+
+  <div class="noAlarms" *ngIf="Alarms.length === 0">
+    Henüz bir alarmınız yok!
+  </div>
+</div>
+
+
+ 

@@ -40,6 +40,8 @@ import { UserService } from './services/user.service';
 import { AlarmComponent } from './alarm/alarm.component';
 import { AlarmDialogComponent } from './alarm-dialog/alarm-dialog.component';
 import { NotificationService } from './services/notification.service';
+import { AlarmDetailsComponent } from './alarm-details/alarm-details.component';
+import { AlarmService } from './services/alarm.service';
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { NotificationService } from './services/notification.service';
     ShoeCommentsComponent,
     ArraySortPipe,
     AlarmComponent,
-    AlarmDialogComponent
+    AlarmDialogComponent,
+    AlarmDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +86,8 @@ import { NotificationService } from './services/notification.service';
     AuthService,
     ScraperService,
     UserService,
-    NotificationService
+    NotificationService,
+    AlarmService
   ],
   bootstrap: [AppComponent],
   entryComponents: [AlarmDialogComponent]
