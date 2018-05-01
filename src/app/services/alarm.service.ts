@@ -5,6 +5,7 @@ import * as firebase from 'firebase';
 import { Alarm } from '../interfaces/Alarm';
 import { AuthService } from './auth.service';
 
+
 @Injectable()
 export class AlarmService implements OnInit {
   notificationsCollection: AngularFirestoreCollection<Alarm>;
@@ -19,6 +20,13 @@ export class AlarmService implements OnInit {
   getAllAlarms(email: String): Observable<Alarm[]> {
     this.notificationsCollection = this.afs.collection('notificationsCollection', ref => {
       return ref.where('Email', '==', email);
+    });
+    return this.notificationsCollection.valueChanges();
+  }
+
+  getAlarms(): Observable<Alarm[]> {
+    this.notificationsCollection = this.afs.collection('notificationsCollection', ref => {
+      return ref;
     });
     return this.notificationsCollection.valueChanges();
   }

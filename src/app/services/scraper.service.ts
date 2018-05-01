@@ -8,10 +8,6 @@ const stringSimilarity = require('string-similarity');
 @Injectable()
 export class ScraperService {
   shoesCollection: AngularFirestoreCollection<Shoe>;
-  ayakkabiDunyasi: {};
-  trendyol: {};
-  sportive: {};
-  barcin: {};
 
   batch;
   shoes: Shoe[];
@@ -23,13 +19,15 @@ export class ScraperService {
 
   scrape() {
     Promise.all([
+      helper.fetchShoesFromYalispor(),
       helper.fetchShoesFromAyakkabiDunyasi(),
       helper.fetchShoesFromTrendyol(),
       helper.fetchShoesFromSportive()
     ])
       .then(results => {
-        [this.ayakkabiDunyasi, this.trendyol, this.sportive] = results;
-        const products = Object.assign(this.ayakkabiDunyasi, this.trendyol, this.sportive);
+        const [yalispor, ayakkabiDunyasi, trendyol, sportive] = results;
+        const products = [].concat(yalispor, ayakkabiDunyasi, trendyol, sportive);
+        console.log(products);
         this.writeBatch(products);
       })
       .catch(err => {
@@ -37,9 +35,10 @@ export class ScraperService {
       });
   }
 
+
   async writeBatch(results) {
     results = await this.similarify(results);
-
+    console.log(results);
     for (let i = 0; i < results.length; i++) {
       const docRef = this.shoesCollection.doc(this.afStore.createId()).ref;
       results[i].ID = docRef.id;

@@ -42,6 +42,7 @@ import { AlarmDialogComponent } from './alarm-dialog/alarm-dialog.component';
 import { NotificationService } from './services/notification.service';
 import { AlarmDetailsComponent } from './alarm-details/alarm-details.component';
 import { AlarmService } from './services/alarm.service';
+import { EmailService } from './services/email.service';
 
 
 @NgModule({
@@ -87,7 +88,8 @@ import { AlarmService } from './services/alarm.service';
     ScraperService,
     UserService,
     NotificationService,
-    AlarmService
+    AlarmService,
+    EmailService
   ],
   bootstrap: [AppComponent],
   entryComponents: [AlarmDialogComponent]

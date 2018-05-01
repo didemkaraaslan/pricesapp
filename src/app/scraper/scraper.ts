@@ -270,8 +270,7 @@ export function fetchShoesFromSportive() {
     const shoes: Shoe[] = [];
     const promises = [
       rp('https://www.sportive.com.tr/tum-spor-ayakkabilar/slazenger-adidas'),
-      rp('https://www.sportive.com.tr/catalog/category/view/id/570/?marka=1042%2C899&p=2'),
-      rp('https://www.sportive.com.tr/catalog/category/view/id/570/?marka=1042%2C899&p=3')
+      rp('https://www.sportive.com.tr/catalog/category/view/id/570/?marka=1042%2C899&p=2')
     ];
     Promise.all(promises).then((pages) => {
 
@@ -320,9 +319,7 @@ export function fetchShoesFromBarcin() {
   return new Promise(function(resolve, reject) {
     const shoes: Shoe[] = [];
     const promises = [
-      rp('http://www.barcin.com/ara?marka[0]=adidas&q=spor%20ayakkab%C4%B1'),
-      rp('http://www.barcin.com/ara?marka[0]=adidas&q=spor+ayakkab%C4%B1&sayfa=2'),
-      rp('http://www.barcin.com/ara?marka[0]=adidas&q=spor+ayakkab%C4%B1&sayfa=3')
+      rp('http://www.barcin.com/ara?marka[0]=adidas&q=spor%20ayakkab%C4%B1')
     ];
     Promise.all(promises).then((pages) => {
 
@@ -333,7 +330,7 @@ export function fetchShoesFromBarcin() {
                   const ProductInfoContainer = $(elm).children('.product-footer');
                   const ProductImageContainer = $(elm).children('.figure');
 
-                  const BrandName = ProductInfoContainer.children('.h3.heading').children().first().text();
+                  const BrandName = ProductInfoContainer.children('.h3.heading').children().text();
                   const SalePrice = ProductInfoContainer.children('.price').children('.new-price').text();
                   const DetailLink = ProductImageContainer.children().first().attr('href');
                   const Image = ProductImageContainer.children().attr('data-original');
@@ -364,3 +361,77 @@ export function fetchShoesFromBarcin() {
   });
 
 }
+
+
+
+
+/**
+ *  Function which fetches shoes data from seller Yalispor
+ */
+export function fetchShoesFromYalispor() {
+  return new Promise(function(resolve, reject) {
+    const shoes: Shoe[] = [];
+    const promises = [
+      rp('https://www.yalispor.com.tr/erkek-spor-ayakkabi?marka%5B%5D=62&marka%5B%5D=61&marka%5B%5D=60&indirim=0'),
+      rp('https://www.yalispor.com.tr/erkek-spor-ayakkabi?marka%5B0%5D=62&marka%5B1%5D=61&marka%5B2%5D=60&indirim=0&page=2'),
+      rp('https://www.yalispor.com.tr/erkek-spor-ayakkabi?marka%5B0%5D=62&marka%5B1%5D=61&marka%5B2%5D=60&indirim=0&page=3')
+    ];
+    Promise.all(promises).then((pages) => {
+        pages.forEach(page => {
+            const $ = cheerio.load(page);
+            $('.col-md-4.col-sm-6.col-xs-12').each((i, elm) => {
+              const productContainer = $(elm).children('.item');
+              const Image = $(elm).children('.item').children('.item-image-container').children().children().children().attr('src');
+              const BrandName = productContainer.children('.item-meta-container').children('.item-name').text();
+              const SalePrice = productContainer.children('.item-price-brand-container').children('.price-container')
+                .children('.item-price').text();
+              const MarketPrice = 0;
+              const DetailLink = $(elm).children('.item').children('.item-image-container').children().children().attr('href');
+
+                const shoe: Shoe = {
+                  ID: '',
+                  Name: '',
+                  BrandName: BrandName,
+                  MarketPrice: 0,
+                  SalePrice: parseInt(SalePrice),
+                  DetailLink: DetailLink,
+                  Seller: 'https://www.yalispor.com.tr',
+                  Image: (Image === undefined) ? '' : Image,
+                  RateValue: 0,
+                  Comments: [
+                    {
+                      author: 'admin',
+                      content: 'ilk yorum'
+                    }
+                  ]
+                };
+                shoes.push(shoe);
+            });
+        });
+     resolve(shoes);
+    });
+  });
+}
+
+
+/**
+ * This function is used in notification service to
+ * check if there is a sale on the shoe on which an alarm is set by user.
+ */
+export function scrapForSale(url: string, oldPrice: number) {
+  let isSaleExists = false;
+  let actualPrice = 0;
+  return new Promise(function(resolve, reject) {
+    request(url, (error, statusCode, page) => {
+      const $ = cheerio.load(page);
+      // tslint:disable-next-line:radix
+      actualPrice = parseInt($('.product-info-priceBox').children('.sale-price').text());
+      if (actualPrice < oldPrice) {
+        isSaleExists = true;
+      }
+      resolve(isSaleExists);
+    });
+  });
+
+}
+
