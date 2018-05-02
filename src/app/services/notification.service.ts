@@ -40,7 +40,7 @@ export class NotificationService {
           this.newAlarm.ShoeID = ID;
           this.newAlarm.Shoe = shoe;
 
-          this.afs.collection('notificationsCollection').doc(this.afs.createId())
+          this.afs.collection('notificationsCollection').doc(shoe.ID)
               .set(this.newAlarm)
               .then(onFulfilled => {
                 this.success = true;
@@ -79,18 +79,21 @@ export class NotificationService {
   watchAlarms() {
     this.alarmService.getAlarms().subscribe(alarms => {
       alarms.forEach(async alarm => {
-        const result = await scrapForSale(alarm.Shoe.DetailLink, alarm.Shoe.SalePrice);
+        const result = await scrapForSale(alarm.Shoe.DetailLink, alarm.Shoe.SalePrice, alarm.Shoe.Seller);
         if (result === true) {
 
           const options = {
             to: alarm.Email,
             from: 'no-reply@pricetracker.com',
             subject: 'İndirim oldu!',
-            html: 'Selam, takip ettiğin ayakkabı indirime girdi.Buradan indirim fiyatını görebilirsin! <strong>' 
+            html: 'Selam, takip ettiğin ayakkabı indirime girdi.Buradan indirim fiyatını görebilirsin! <strong>'
             + alarm.Shoe.DetailLink + '</strong>',
           };
 
+          // If there is a sale on the alarm then send an email to 
+          // the user and delete the alarm.
           this.emailService.sendMail(options);
+          this.alarmService.deleteAlarmWithId(alarm.ShoeID);
         }
         console.log(alarm.Email + ' ' + alarm.Shoe.Name + ' ' + result + alarm.Shoe.DetailLink);
       });

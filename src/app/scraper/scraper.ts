@@ -418,14 +418,35 @@ export function fetchShoesFromYalispor() {
  * This function is used in notification service to
  * check if there is a sale on the shoe on which an alarm is set by user.
  */
-export function scrapForSale(url: string, oldPrice: number) {
+export function scrapForSale(url: string, oldPrice: number, seller: string) {
   let isSaleExists = false;
   let actualPrice = 0;
+  const sellerYalispor = 'https://www.yalispor.com.tr';
+  const sellerTrendyol = 'www.trendyol.com';
+  const sellerSportive = 'www.sportive.com.tr';
+  const sellerAyakkabiDunyasi = 'www.ayakkabidunyasi.com.tr';
+
   return new Promise(function(resolve, reject) {
     request(url, (error, statusCode, page) => {
       const $ = cheerio.load(page);
-      // tslint:disable-next-line:radix
-      actualPrice = parseInt($('.product-info-priceBox').children('.sale-price').text());
+      switch (seller) {
+        case sellerTrendyol:
+             actualPrice = parseInt($('.product-info-priceBox').children('.sale-price').text(), 16);
+             break;
+
+        case sellerAyakkabiDunyasi:
+             actualPrice = parseInt($('.product-detail.cf').children('.product-detail__price')
+                  .children('.product-detail__sale-price').text(), 16);
+             break;
+
+        case sellerSportive:
+             actualPrice = parseInt($('.col-md-6.col-sm-6.col-sm-12').children('.value').children('.price').text(), 16);
+             break;
+        case sellerYalispor:
+             actualPrice = parseInt($('.dl-horizontal.span11').children('.gosibo-dd-fiyat.gf-dd-fiyat').text(), 16);
+             break;
+      }
+
       if (actualPrice < oldPrice) {
         isSaleExists = true;
       }

@@ -31,4 +31,9 @@ export class AlarmService implements OnInit {
     return this.notificationsCollection.valueChanges();
   }
 
+  deleteAlarmWithId(ID: string) {
+    this.afs.collection('notificationsCollection')
+            .doc(ID).delete();
+  }
+
 }
