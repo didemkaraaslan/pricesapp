@@ -3,7 +3,7 @@
 <div class="button-row">
     <button mat-button color="primary" (click)="filter('1')">En Pahalılar</button>
     <button mat-button color="primary" (click)="filter('2')">En Ucuzlar</button>
-    <button mat-button color="primary" (click)="filter('3')">En çok yorum alanlar</button>
+    <button mat-button color="primary" (click)="filter('3')">En fazla fiyat verenler</button>
 </div>
   <div class="card-deck" align="center" *ngIf="shoes.length > 0;else no_result">
       <div class="col-md-4" *ngFor="let shoe of shoes">

@@ -46,6 +46,7 @@ export class ScraperService {
     }
 
     this.batch.commit().then(function () {
+      console.log('Database operation finish');
       console.log(results.length);
     });
   }

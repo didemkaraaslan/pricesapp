@@ -41,7 +41,7 @@ export class ShoesComponent implements OnInit {
         break;
       }
       case '3': {
-        this.shoes = this.shoesFirestore.filter( shoe => shoe.SalePrice === 180);
+        this.shoes = this.shoesFirestore.filter( shoe => shoe.SimilarWith.length > 3);
         break;
       }
     }

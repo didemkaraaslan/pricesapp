@@ -114,8 +114,9 @@ export function fetchShoesFromTrendyol() {
   return new Promise(function(resolve, reject) {
     const shoes: Shoe[] = [];
     const promises = [
-      rp('https://www.trendyol.com/adidas+slazenger?q=Spor+Ayakab%C4%B1&st=spor%20ayakab%C4%B1&qt=spor%20ayakab%C4%B1&qs=search'),
-      rp('https://www.trendyol.com/adidas+slazenger?q=Spor+Ayakab%C4%B1&st=spor%20ayakab%C4%B1&qt=spor%20ayakab%C4%B1&qs=search&pi=2')
+      rp('https://www.trendyol.com/spor-ayakkabi?st=spor%20ayakkab%C4%B1&qt=spor%20ayakkab%C4%B1&qs=search'),
+      rp('https://www.trendyol.com/spor-ayakkabi?st=spor%20ayakkab%C4%B1&qt=spor%20ayakkab%C4%B1&qs=search&pi=2'),
+      rp('https://www.trendyol.com/spor-ayakkabi?st=spor%20ayakkab%C4%B1&qt=spor%20ayakkab%C4%B1&qs=search&pi=3')
     ];
     Promise.all(promises).then((pages) => {
         pages.forEach(page => {
@@ -269,8 +270,9 @@ export function fetchShoesFromSportive() {
   return new Promise(function(resolve, reject) {
     const shoes: Shoe[] = [];
     const promises = [
-      rp('https://www.sportive.com.tr/tum-spor-ayakkabilar/slazenger-adidas'),
-      rp('https://www.sportive.com.tr/catalog/category/view/id/570/?marka=1042%2C899&p=2')
+      rp('https://www.sportive.com.tr/cocuk-spor-ayakkabi'),
+      rp('https://www.sportive.com.tr/cocuk-spor-ayakkabi?p=2'),
+      rp('https://www.sportive.com.tr/cocuk-spor-ayakkabi?p=3')
     ];
     Promise.all(promises).then((pages) => {
 
@@ -372,9 +374,9 @@ export function fetchShoesFromYalispor() {
   return new Promise(function(resolve, reject) {
     const shoes: Shoe[] = [];
     const promises = [
-      rp('https://www.yalispor.com.tr/erkek-spor-ayakkabi?marka%5B%5D=62&marka%5B%5D=61&marka%5B%5D=60&indirim=0'),
-      rp('https://www.yalispor.com.tr/erkek-spor-ayakkabi?marka%5B0%5D=62&marka%5B1%5D=61&marka%5B2%5D=60&indirim=0&page=2'),
-      rp('https://www.yalispor.com.tr/erkek-spor-ayakkabi?marka%5B0%5D=62&marka%5B1%5D=61&marka%5B2%5D=60&indirim=0&page=3')
+      rp('https://www.yalispor.com.tr/tum-urunler?search=spor+ayakkab%C4%B1'),
+      rp('https://www.yalispor.com.tr/marka?search=spor+ayakkab%C4%B1&page=2'),
+      rp('https://www.yalispor.com.tr/marka?search=spor+ayakkab%C4%B1&page=3')
     ];
     Promise.all(promises).then((pages) => {
         pages.forEach(page => {
